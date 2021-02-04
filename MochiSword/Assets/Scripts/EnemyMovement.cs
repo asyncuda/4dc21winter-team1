@@ -9,18 +9,21 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float xSpeed = 2.0f;       // 秒間速度 (block/sec)
     [SerializeField] float invertTime = 2.0f;   // 往復時間 (sec)
     [SerializeField] bool isJump = true;        // ジャンプするかどうか
-    [SerializeField] GroundCheck groundCheck;   // 接地判定用
+    [SerializeField] GroundCheck groundCheck = default;   // 接地判定
 
     private float currentTime = 0f;     // 横移動用
     private float currentTime2 = 0f;    // ジャンプ用
-    private float jumpTime = 0.5f;      // ジャンプの時間間隔 (sec)
-    private float jumpPower = 3.0f;     // ジャンプの高さ
+    private float jumpTime = 3.0f;      // ジャンプの時間間隔 (sec)
+    private float jumpPower = 4.0f;     // ジャンプの高さ
+    private bool isGrounded;            // 接地判定に必要
     private Rigidbody2D rb;
+    private Animator animator;
     private Vector2 vector;
-
+    
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb       = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -31,12 +34,21 @@ public class EnemyMovement : MonoBehaviour
         }
 
         // 小ジャンプ判定
-        if (groundCheck.isGrounded() && isJump) {
+        if (isJump) {
             Jump();
         }
+
+        isGrounded = groundCheck.isGrounded(); // 接地判定
     }
     private void FixedUpdate()
     {
+        // 敵の向き調整
+        if (xSpeed > 0f) {
+            transform.localScale = new Vector2(1f, 1f);
+        } else if (xSpeed < 0f) {
+            transform.localScale = new Vector2(-1f, 1f);
+        }
+
         // 移動処理
         if (isXMove) {
             vector.x = -xSpeed;
@@ -62,6 +74,10 @@ public class EnemyMovement : MonoBehaviour
         if (currentTime2 > jumpTime) {
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             currentTime2 = 0f;
+        } else if (currentTime2 > jumpTime - 0.4f){
+            animator.SetBool("isJump", true);
+        } else if (currentTime2 > 0.4f && isGrounded) {
+            animator.SetBool("isJump", false);
         }
     }
 }
