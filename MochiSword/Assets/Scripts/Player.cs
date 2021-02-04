@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
             {
                 AttackFURI();
             }
-            if (Input.GetKeyDown(KeyCode.X))
+            else if (Input.GetKeyDown(KeyCode.X))
             {
                 AttackTUKI();
             }
