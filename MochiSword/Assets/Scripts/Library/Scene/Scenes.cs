@@ -1,4 +1,4 @@
-﻿namespace Library {
+﻿namespace Library.Scene {
     public enum Scenes {
         Title = 0,
         Game = 1,
