@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Library;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,11 +11,19 @@ public class Player : MonoBehaviour
         RIGHT
     }
 
+    private enum AttackState
+    {
+        IDLE,
+        FURI,
+        TUKI
+    }
+
     [SerializeField] private GameManager manager;
     [SerializeField] private Animator anim;
     [SerializeField] private GroundCheck groundCheck;
 
-    [SerializeField] private GameObject attack_h;
+    [SerializeField] private GameObject attack_tuki;
+    [SerializeField] private GameObject attack_furi;
     [SerializeField] private AudioSource jump_sound;
 
     [SerializeField] private float move_speed = 100f;
@@ -26,6 +35,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb2d;
     private Vector2 input_movement;
     private bool jump_trigger = false;
+    private AttackState attack_state = AttackState.IDLE;
 
     private Direction before_dir;
 
@@ -36,7 +46,7 @@ public class Player : MonoBehaviour
 
         before_dir = Direction.RIGHT;
 
-        HideHAttack();
+        HideAttack();
     }
 
     void Update()
@@ -50,11 +60,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            ShowHAttack();
-            Invoke("HideHAttack", 0.1f);
-        }
+        UpdateAttack();
     }
 
     // Update is called once per frame
@@ -64,14 +70,53 @@ public class Player : MonoBehaviour
         rb2d.AddForce(input_movement * Time.deltaTime);
     }
 
-    void ShowHAttack()
+    void UpdateAttack()
     {
-        attack_h.SetActive(true);
+        if (attack_state == AttackState.IDLE)
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                AttackFURI();
+            }
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                AttackTUKI();
+            }
+        }
     }
 
-    void HideHAttack()
+    void AttackFURI()
     {
-        attack_h.SetActive(false);
+        attack_state = AttackState.FURI;
+        attack_furi.SetActive(true);
+        Invoke("HideAttack", 0.1f);
+
+        NotifyAttackState(AttackState.FURI);
+    }
+
+    void AttackTUKI()
+    {
+        attack_state = AttackState.TUKI;
+        attack_tuki.SetActive(true);
+        Invoke("HideAttack", 0.1f);
+
+        NotifyAttackState(AttackState.TUKI);
+    }
+
+    void HideAttack()
+    {
+        attack_state = AttackState.IDLE;
+        attack_furi.SetActive(false);
+        attack_tuki.SetActive(false);
+    }
+
+    void NotifyAttackState(AttackState state)
+    {
+        /*
+        === Add notify system here. ===
+        */
+
+        Debugger.Log("Notify AttackState [" + state + "]");
     }
 
     Vector2 GetHorizontalMovement()
