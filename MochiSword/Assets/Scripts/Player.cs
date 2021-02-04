@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         input_movement = GetHorizontalMovement() * move_speed;
         if (IsGrounded())
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 Jump();
             }
