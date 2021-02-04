@@ -135,7 +135,9 @@ MonoBehaviour:
   attack_furi: {fileID: 2937076165466971228}
   jump_sound: {fileID: 4685251662122518396}
   move_speed: 16000
-  jump_force: 900
+  jump_force: 600
+  last_jump_force: 300
+  max_jump_time: 0.2
   start_direction: 1
   health: 3
 --- !u!50 &3754626576552931257

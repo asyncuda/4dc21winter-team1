@@ -18,6 +18,13 @@ public class Player : MonoBehaviour
         TUKI
     }
 
+    private enum JumpState
+    {
+        IDLE,
+        JUMPING,
+        LAST
+    }
+
     [SerializeField] private GameManager manager;
     [SerializeField] private Animator anim;
     [SerializeField] private GroundCheck groundCheck;
@@ -28,13 +35,17 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float move_speed = 100f;
     [SerializeField] private float jump_force = 100f;
+    [SerializeField] private float last_jump_force = 500f;
+    [SerializeField] private float max_jump_time = 0.5f;
     [SerializeField] private Direction start_direction = Direction.RIGHT;
 
     [SerializeField] private int health = 3;
 
     private Rigidbody2D rb2d;
     private Vector2 input_movement;
-    private bool jump_trigger = false;
+    private JumpState jump_state = JumpState.IDLE;
+    private bool on_ground = false;
+    private float current_jump_time = 0;
     private AttackState attack_state = AttackState.IDLE;
 
     private Direction before_dir;
@@ -51,12 +62,51 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        input_movement = GetHorizontalMovement() * move_speed;
-        if (IsGrounded())
+        on_ground = IsGrounded();
+
+        if (on_ground)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            current_jump_time = 0;
+            jump_state = JumpState.IDLE;
+        }
+        
+        input_movement = GetHorizontalMovement() * move_speed;
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (jump_state == JumpState.IDLE)
             {
-                Jump();
+                if (on_ground)
+                {
+                    jump_sound.Play();
+                    current_jump_time = 0;
+                    jump_state = JumpState.JUMPING;
+                }
+            }
+            else if (jump_state == JumpState.JUMPING)
+            {
+                if (current_jump_time < max_jump_time)
+                {
+                    jump_state = JumpState.JUMPING;
+                }
+                else
+                {
+                    jump_state = JumpState.LAST;
+                }
+            }
+            else if (jump_state == JumpState.LAST)
+            {
+                jump_state = JumpState.IDLE;
+            }
+        }
+        else
+        {
+            if (jump_state == JumpState.JUMPING)
+            {
+                jump_state = JumpState.LAST;
+            }
+            else
+            {
+                jump_state = JumpState.IDLE;
             }
         }
 
@@ -68,6 +118,18 @@ public class Player : MonoBehaviour
     {
         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
         rb2d.AddForce(input_movement * Time.deltaTime);
+
+        if (jump_state == JumpState.JUMPING)
+        {
+            current_jump_time += Time.deltaTime;
+            Debugger.Log("JUMPING");
+            Jump(jump_force);
+        }
+        if (jump_state == JumpState.LAST)
+        {
+            Debugger.Log("LAST JUMP");
+            Jump(last_jump_force);
+        }
     }
 
     void UpdateAttack()
@@ -152,11 +214,10 @@ public class Player : MonoBehaviour
         return groundCheck.isGrounded();
     }
 
-    void Jump()
+    void Jump(float force)
     {
-        jump_sound.Play();
         rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
-        rb2d.AddForce(Vector2.up * jump_force);
+        rb2d.AddForce(Vector2.up * force);
     }
 
     void OnTriggerEnter2D(Collider2D col)
