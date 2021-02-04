@@ -10,18 +10,18 @@ public class Player : MonoBehaviour
         RIGHT
     }
 
-    public GameManager manager;
-    public Animator anim;
-    public GroundCheck groundCheck;
+    [SerializeField] private GameManager manager;
+    [SerializeField] private Animator anim;
+    [SerializeField] private GroundCheck groundCheck;
 
-    public GameObject attack_h;
-    public AudioSource jump_sound;
+    [SerializeField] private GameObject attack_h;
+    [SerializeField] private AudioSource jump_sound;
 
-    public float move_speed = 100f;
-    public float jump_force = 100f;
+    [SerializeField] private float move_speed = 100f;
+    [SerializeField] private float jump_force = 100f;
     [SerializeField] private Direction start_direction = Direction.RIGHT;
 
-    public int health = 3;
+    [SerializeField] private int health = 3;
 
     private Rigidbody2D rb2d;
     private Vector2 input_movement;
