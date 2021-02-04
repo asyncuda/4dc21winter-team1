@@ -30,9 +30,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         input_movement = GetHorizontalMovement() * move_speed;
-        if (Input.GetKeyDown(KeyCode.X) && IsGrounded())
+        if (IsGrounded())
         {
-            Jump();
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                Jump();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Z))

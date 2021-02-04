@@ -13,7 +13,7 @@ public class GroundCheck : MonoBehaviour
 
     public bool isGrounded()
     {
-        if(GroundEnter && GroundStay)
+        if(GroundEnter || GroundStay)
         {
             IsGround = true;
         }else if (GroundExit)
