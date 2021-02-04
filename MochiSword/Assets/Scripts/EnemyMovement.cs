@@ -17,13 +17,16 @@ public class EnemyMovement : MonoBehaviour
     private float jumpPower = 4.0f;     // ジャンプの高さ
     private bool isGrounded;            // 接地判定に必要
     private Rigidbody2D rb;
+    private Renderer rend;
     private Animator animator;
     private Vector2 vector;
-    
+
     private void Start()
     {
         rb       = GetComponent<Rigidbody2D>();
+        rend     = GetComponent<Renderer>();
         animator = GetComponent<Animator>();
+        var wait = new WaitForSeconds(0.2f);
     }
 
     private void Update()
@@ -39,14 +42,18 @@ public class EnemyMovement : MonoBehaviour
         }
 
         isGrounded = groundCheck.isGrounded(); // 接地判定
+
+        if (Input.GetKeyDown(KeyCode.P)) {
+            StartCoroutine("DeathEffect");
+        }
     }
     private void FixedUpdate()
     {
         // 敵の向き調整
         if (xSpeed > 0f) {
-            transform.localScale = new Vector2(1f, 1f);
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
         } else if (xSpeed < 0f) {
-            transform.localScale = new Vector2(-1f, 1f);
+            transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
         }
 
         // 移動処理
@@ -78,6 +85,16 @@ public class EnemyMovement : MonoBehaviour
             animator.SetBool("isJump", true);
         } else if (currentTime2 > 0.4f && isGrounded) {
             animator.SetBool("isJump", false);
+        }
+    }
+
+    private IEnumerator DeathEffect()
+    {
+        // 点滅処理
+        var wait = new WaitForSeconds(0.075f);
+        for (int i = 0; i < 10; i++) {
+            rend.enabled = !rend.enabled;
+            yield return wait;
         }
     }
 }
