@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private enum Direction
+    {
+        LEFT,
+        RIGHT
+    }
+
     public GameManager manager;
     public Animator anim;
     public GroundCheck groundCheck;
@@ -13,6 +19,7 @@ public class Player : MonoBehaviour
 
     public float move_speed = 100f;
     public float jump_force = 100f;
+    [SerializeField] private Direction start_direction = Direction.RIGHT;
 
     public int health = 3;
 
@@ -20,10 +27,15 @@ public class Player : MonoBehaviour
     private Vector2 input_movement;
     private bool jump_trigger = false;
 
+    private Direction before_dir;
+
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+
+        before_dir = Direction.RIGHT;
+
         HideHAttack();
     }
 
@@ -67,8 +79,27 @@ public class Player : MonoBehaviour
         Vector2 movement = Vector2.zero;
 
         movement.x = Input.GetAxis("Horizontal");
+        
+        if(movement.x > 0)
+        {
+            UpdateFlip(Direction.RIGHT);
+        }
+        if(movement.x < 0)
+        {
+            UpdateFlip(Direction.LEFT);
+        }
+
 
         return movement;
+    }
+
+    void UpdateFlip(Direction dir)
+    {
+        if(dir != before_dir)
+        {
+            before_dir = dir;
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
     }
 
     bool IsGrounded()
