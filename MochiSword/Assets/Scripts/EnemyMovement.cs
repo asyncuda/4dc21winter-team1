@@ -37,12 +37,10 @@ public class EnemyMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!isXMove) {
-            return;
-        }
-
         // 移動処理
-        vector.x = -xSpeed;
+        if (isXMove) {
+            vector.x = -xSpeed;
+        }
         vector.y = rb.velocity.y;
         rb.velocity = vector;
     }
