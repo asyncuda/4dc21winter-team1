@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Library {
+namespace Library.Scene {
     public class ScreenFader : MonoBehaviour {
         private readonly Rect size = new Rect(0, 0, Screen.width, Screen.height);
         private Color fadeColor = Color.black;
