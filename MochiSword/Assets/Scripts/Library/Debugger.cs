@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 
 namespace Library {
-    public class Debugger {
+    public static class Debugger {
         /// <summary>
         /// Debug.LogをUnity Editorでのみ表示する
         /// </summary>
