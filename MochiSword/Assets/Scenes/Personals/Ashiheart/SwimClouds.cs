@@ -6,13 +6,35 @@ using DG.Tweening;
 
 public class SwimClouds : MonoBehaviour
 {
-    [SerializeField] private GameObject DarkCloud;
+    [SerializeField] private GameObject DarkCloudLeft;
 
+    [SerializeField] private GameObject DarkCloudRight;
+
+    [SerializeField] private float SpecialAttackTime;
+
+
+    private Vector3 LeftInitialPosition; 
+
+    private Vector3 RightInitialPosition; 
 
     private void Awake()
     {
+        DOTween.Init();
+        DOTween.defaultAutoPlay = AutoPlay.None;
 
-        
+        LeftInitialPosition = new Vector3
+            (
+            DarkCloudLeft.transform.position.x,
+            DarkCloudLeft.transform.position.y,
+            DarkCloudLeft.transform.position.z
+            );
+
+        RightInitialPosition = new Vector3
+            (
+            DarkCloudRight.transform.position.x,
+            DarkCloudRight.transform.position.y,
+            DarkCloudRight.transform.position.z
+            );
     }
 
     // Start is called before the first frame update
@@ -31,27 +53,48 @@ public class SwimClouds : MonoBehaviour
         */
 
         CloudMoving();
+
+        SpecialTime();
     }
 
     private void CloudMoving()
     {
-        GameObject dc = Instantiate(DarkCloud);
+    }
 
-        dc.transform.position = new Vector3(0, 0, 0);
+    private void SpecialTime()
+    {
+        var leftseq1 = DOTween.Sequence();
 
-        dc.transform
-            .DOMove(Vector3.left * 10, 3)
-            .OnComplete(() => CloudMoving());
+        var leftseq2 = DOTween.Sequence();
 
-        Debugger.Log("作成！");
+        leftseq2
+            .Append(DarkCloudLeft.transform.DOScale(Vector3.one * 1.05f, 0.5f))
+            .Append(DarkCloudLeft.transform.DOScale(Vector3.one * 1.0f, 0.5f))
+            .SetEase(Ease.Linear)
+            .SetLoops((int)SpecialAttackTime);
 
+        leftseq1
+            .Append(DarkCloudLeft.transform.DOMove(LeftInitialPosition + Vector3.left * 5, 2))
+            .AppendCallback(() => leftseq2.Play())
+            .AppendInterval(SpecialAttackTime)
+            .Append(DarkCloudLeft.transform.DOMove(LeftInitialPosition, 3))
+            .Play()
+            ;
 
+        var rightseq1 = DOTween.Sequence();
 
-        dc.transform
-            .DOMove(Vector3.left * 20, 3)
-            .OnComplete(() => Destroy(dc));
+        rightseq1
+            .Append(DarkCloudRight.transform.DOMove(RightInitialPosition + Vector3.right * 5, 2))
+            .AppendInterval(SpecialAttackTime)
+            .Append(DarkCloudRight.transform.DOMove(RightInitialPosition, 3));
 
-        Debugger.Log("完了！");
+        var rightseq2 = DOTween.Sequence();
+
+        rightseq2
+            .Append(DarkCloudRight.transform.DOScale(Vector3.one * 1.2f, 0.5f))
+            .Append(DarkCloudRight.transform.DOScale(Vector3.one * 1.0f, 0.5f))
+            .SetEase(Ease.Linear)
+            .SetLoops((int)SpecialAttackTime);
     }
 
     // Update is called once per frame
