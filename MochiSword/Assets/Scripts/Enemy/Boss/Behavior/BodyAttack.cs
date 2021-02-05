@@ -24,16 +24,10 @@ public class BodyAttack : MonoBehaviour
             .SetEase(Ease.Linear)
             .Append(target.DOMoveX(from.x + 0.08f, 0.5f))
             .Append(target.DOMoveX(from.x, 0.5f))
+            .SetLink(gameObject)
             .SetLoops(-1)
+            .Play()
         ;
-
-
-        /*
-        DOTween.To(
-            () => target.RotateAround(
-            )
-        */
-        
     }
 
     // Update is called once per frame
