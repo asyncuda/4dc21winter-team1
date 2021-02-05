@@ -24,19 +24,9 @@ public class SwimClouds : MonoBehaviour
         DOTween.Init();
         DOTween.defaultAutoPlay = AutoPlay.None;
 
-        LeftInitialPosition = new Vector3
-            (
-            DarkCloudLeft.transform.position.x,
-            DarkCloudLeft.transform.position.y,
-            DarkCloudLeft.transform.position.z
-            );
+        LeftInitialPosition = DarkCloudLeft.transform.position;
 
-        RightInitialPosition = new Vector3
-            (
-            DarkCloudRight.transform.position.x,
-            DarkCloudRight.transform.position.y,
-            DarkCloudRight.transform.position.z
-            );
+        RightInitialPosition = DarkCloudRight.transform.position;
     }
 
     // Start is called before the first frame update
