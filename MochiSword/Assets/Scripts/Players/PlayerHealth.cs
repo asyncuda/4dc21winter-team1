@@ -13,7 +13,10 @@ namespace Players {
         private PlayerMediator mediator;
 
         private void Start() {
+
             mediator = GetComponent<PlayerMediator>();
+
+            mediator.OnHealthChanged(health);
 
             this.ObserveEveryValueChanged(x => x.health)
                 .Where(x => x <= 0)
