@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Library.Scene;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
     private Animator animator;
     private Vector2 vector;
     private Vector2 start, dir;
+
 
     private void Start()
     {

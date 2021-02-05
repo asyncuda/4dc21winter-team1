@@ -4,31 +4,31 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -2566791840715176196
-    second: enemy_sprite_0
+    second: soft_mochi_0
   - first:
       213: 7944878729352474619
-    second: enemy_sprite_1
+    second: soft_mochi_1
   - first:
       213: 462536456465309483
-    second: enemy_sprite_2
+    second: soft_mochi_2
   - first:
       213: 4108637048288448766
-    second: enemy_sprite_3
+    second: hard_mochi_0
   - first:
       213: 3252324239031298986
-    second: enemy_hard_0
+    second: hard_mochi_0
   - first:
       213: -5732043152849775902
-    second: enemy_hard_1
+    second: hard_mochi_1
   - first:
       213: 7298268801279563374
-    second: enemy_hard_2
+    second: hard_mochi_1
   - first:
       213: -2224017270099880146
-    second: enemy_hard_3
+    second: hard_mochi_2
   - first:
       213: 6499235622968225043
-    second: enemy_hard_4
+    second: hard_mochi_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -114,7 +114,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: enemy_sprite_0
+      name: soft_mochi_0
       rect:
         serializedVersion: 2
         x: 11
@@ -135,7 +135,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_sprite_1
+      name: soft_mochi_1
       rect:
         serializedVersion: 2
         x: 50
@@ -156,7 +156,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_sprite_2
+      name: soft_mochi_2
       rect:
         serializedVersion: 2
         x: 96
@@ -177,16 +177,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_sprite_3
+      name: hard_mochi_0
       rect:
         serializedVersion: 2
         x: 5
-        y: 22
+        y: 23
         width: 56
-        height: 72
+        height: 70
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 3}
+      border: {x: 0, y: 0, z: 0, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -198,16 +198,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_hard_2
+      name: hard_mochi_1
       rect:
         serializedVersion: 2
         x: 75
-        y: 22
+        y: 23
         width: 50
-        height: 72
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 1}
+        height: 70
+      alignment: 9
+      pivot: {x: 0.3946744, y: 0.49999985}
+      border: {x: 0, y: 0, z: 9, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -219,16 +219,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_hard_3
+      name: hard_mochi_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 21
+        y: 22
         width: 56
-        height: 72
+        height: 70
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 3}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 2}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -240,16 +240,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: enemy_hard_4
+      name: hard_mochi_3
       rect:
         serializedVersion: 2
         x: 206
-        y: 21
+        y: 22
         width: 50
-        height: 72
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 1}
+        height: 70
+      alignment: 9
+      pivot: {x: 0.40936494, y: 0.5}
+      border: {x: 0, y: 0, z: 9, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0

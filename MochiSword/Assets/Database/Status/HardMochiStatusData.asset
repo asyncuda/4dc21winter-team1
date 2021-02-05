@@ -15,3 +15,4 @@ MonoBehaviour:
   type: 1
   health: 0
   power: 0
+  jumpPower: 0
