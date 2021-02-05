@@ -48,7 +48,8 @@ public class EnemyMovement : MonoBehaviour
             Jump();
         }
 
-        isGrounded = groundCheck.isGrounded(); // 接地判定
+        // 接地判定
+        isGrounded = groundCheck.isGrounded();
 
 
         // 点滅
@@ -56,6 +57,7 @@ public class EnemyMovement : MonoBehaviour
             StartCoroutine("DeathEffect");
         }
     }
+
     private void FixedUpdate()
     {
         // 敵の向き調整
@@ -117,9 +119,8 @@ public class EnemyMovement : MonoBehaviour
     public void ChangeCollider_Hard()
     {
         // HardMochi の Collider を入れ替える
-        for (int i = 0; i < col.Length; i++) {
-            col[i].enabled = !col[i].enabled;
-        }
+        col[0].enabled = !col[0].enabled;
+        col[1].enabled = !col[1].enabled;
     }
 
     private IEnumerator DeathEffect()
