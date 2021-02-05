@@ -6,6 +6,7 @@ namespace Library.Scene {
     public static class SceneMover {
         private static readonly ScreenFader ScreenFader;
         private const float FadeTime = 1.0f;
+        private const float RestartTime = 0.2f;
         private static bool isSceneChanging;
 
         static SceneMover() {
@@ -23,6 +24,22 @@ namespace Library.Scene {
             await ScreenFader.FadeOutAsync(FadeTime);
             await SceneManager.LoadSceneAsync((int) scene);
             await ScreenFader.FadeInAsync(FadeTime);
+            isSceneChanging = false;
+        }
+
+        /// <summary>
+        /// リスタートする
+        /// </summary>
+        public static void Restart() {
+            Move(Scenes.Game, RestartTime).Forget();
+        }
+
+        private static async UniTaskVoid Move(Scenes scene, float time) {
+            if (isSceneChanging) return;
+            isSceneChanging = true;
+            await ScreenFader.FadeOutAsync(time);
+            await SceneManager.LoadSceneAsync((int) scene);
+            await ScreenFader.FadeInAsync(time);
             isSceneChanging = false;
         }
     }
