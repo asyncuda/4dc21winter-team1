@@ -28,10 +28,9 @@ public class EnemyMovement : MonoBehaviour
         rb       = GetComponent<Rigidbody2D>();
         rend     = GetComponent<Renderer>();
         animator = GetComponent<Animator>();
+        col      = GetComponents<PolygonCollider2D>();
+
         var wait = new WaitForSeconds(0.2f);
-
-        col = GetComponents<PolygonCollider2D>();
-
     }
 
     private void Update()
