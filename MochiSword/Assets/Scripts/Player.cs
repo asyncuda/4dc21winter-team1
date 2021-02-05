@@ -292,11 +292,13 @@ public class Player : MonoBehaviour
         {
             Damage(9999);
         }
-
+        
+        /*
         if (col.tag == "Enemy" || col.tag == "E_Attack")
         {
             Damage(1);
         }
+        */
     }
 
     public void Damage(int value)
