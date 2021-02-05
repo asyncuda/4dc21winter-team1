@@ -153,12 +153,12 @@ public class Player : MonoBehaviour
         if (jump_state == JumpState.JUMPING)
         {
             current_jump_time += Time.deltaTime;
-            Debugger.Log("JUMPING");
+            // Debugger.Log("JUMPING");
             Jump(jump_force);
         }
         if (jump_state == JumpState.LAST)
         {
-            Debugger.Log("LAST JUMP");
+            // Debugger.Log("LAST JUMP");
             Jump(last_jump_force);
         }
     }
@@ -189,7 +189,6 @@ public class Player : MonoBehaviour
         if (mediator.isBuffing) buffSlashEffect.SetActive(true);
         else slashEffect.SetActive(true);
         anim.SetTrigger("Furi");
-        NotifyAttackState(AttackState.FURI);
 
         yield return new WaitForSeconds(attack_time);
 
@@ -203,7 +202,6 @@ public class Player : MonoBehaviour
         if (mediator.isBuffing) buffSpearEffect.SetActive(true);
         else buffSpearEffect.SetActive(true);
         anim.SetTrigger("Tuki");
-        NotifyAttackState(AttackState.TUKI);
 
         yield return new WaitForSeconds(attack_time);
         
@@ -226,15 +224,6 @@ public class Player : MonoBehaviour
         attack_state = AttackState.IDLE;
         attack_furi.SetActive(false);
         attack_tuki.SetActive(false);
-    }
-
-    void NotifyAttackState(AttackState state)
-    {
-        /*
-        === Add notify system here. ===
-        */
-
-        Debugger.Log("Notify AttackState [" + state + "]");
     }
 
     Vector2 GetHorizontalMovement()
@@ -300,7 +289,7 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("Hit!!!");
+        // Debug.Log("Hit!!!");
         if (col.tag == "DeathZone")
         {
             Damage(9999);
