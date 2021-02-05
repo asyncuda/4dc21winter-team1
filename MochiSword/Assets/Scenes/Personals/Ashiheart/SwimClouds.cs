@@ -12,6 +12,8 @@ public class SwimClouds : MonoBehaviour
 
     [SerializeField] private float SpecialAttackTime;
 
+    [SerializeField] private float CloudBound;
+
 
     private Vector3 LeftInitialPosition; 
 
@@ -63,38 +65,41 @@ public class SwimClouds : MonoBehaviour
 
     private void SpecialTime()
     {
-        var leftseq1 = DOTween.Sequence();
+        var LeftSeq = DOTween.Sequence();
 
-        var leftseq2 = DOTween.Sequence();
-
-        leftseq2
-            .Append(DarkCloudLeft.transform.DOScale(Vector3.one * 1.05f, 0.5f))
-            .Append(DarkCloudLeft.transform.DOScale(Vector3.one * 1.0f, 0.5f))
-            .SetEase(Ease.Linear)
-            .SetLoops((int)SpecialAttackTime);
-
-        leftseq1
-            .Append(DarkCloudLeft.transform.DOMove(LeftInitialPosition + Vector3.left * 5, 2))
-            .AppendCallback(() => leftseq2.Play())
-            .AppendInterval(SpecialAttackTime)
-            .Append(DarkCloudLeft.transform.DOMove(LeftInitialPosition, 3))
+        LeftSeq
+            .Append(DarkCloudLeft.transform.DOMove(LeftInitialPosition + Vector3.left * 5, 2)) //開く
+            .AppendCallback(() =>
+            {
+                DOTween.Sequence()
+                .Append(DarkCloudLeft.transform.DOScale(Vector3.one * CloudBound, 0.5f))
+                .Append(DarkCloudLeft.transform.DOScale(Vector3.one * 1.0f, 0.5f))
+                .SetEase(Ease.Linear)
+                .SetLoops((int)SpecialAttackTime)
+                .Play();
+            })
+            .AppendInterval(SpecialAttackTime) // 待機
+            .Append(DarkCloudLeft.transform.DOMove(LeftInitialPosition, 3)) // 閉じる
             .Play()
             ;
 
-        var rightseq1 = DOTween.Sequence();
+        var RightSeq = DOTween.Sequence();
 
-        rightseq1
-            .Append(DarkCloudRight.transform.DOMove(RightInitialPosition + Vector3.right * 5, 2))
-            .AppendInterval(SpecialAttackTime)
-            .Append(DarkCloudRight.transform.DOMove(RightInitialPosition, 3));
-
-        var rightseq2 = DOTween.Sequence();
-
-        rightseq2
-            .Append(DarkCloudRight.transform.DOScale(Vector3.one * 1.2f, 0.5f))
-            .Append(DarkCloudRight.transform.DOScale(Vector3.one * 1.0f, 0.5f))
-            .SetEase(Ease.Linear)
-            .SetLoops((int)SpecialAttackTime);
+         RightSeq
+            .Append(DarkCloudRight.transform.DOMove(RightInitialPosition + Vector3.right* 5, 2)) //開く
+            .AppendCallback(() =>
+            {
+                DOTween.Sequence()
+                .Append(DarkCloudRight.transform.DOScale(Vector3.one * CloudBound, 0.5f))
+                .Append(DarkCloudRight.transform.DOScale(Vector3.one * 1.0f, 0.5f))
+                .SetEase(Ease.Linear)
+                .SetLoops((int)SpecialAttackTime)
+                .Play();
+            })
+            .AppendInterval(SpecialAttackTime) // 待機
+            .Append(DarkCloudRight.transform.DOMove(RightInitialPosition, 3)) // 閉じる
+            .Play()
+            ;
     }
 
     // Update is called once per frame
