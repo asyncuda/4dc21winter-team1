@@ -354,7 +354,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -370,19 +370,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
---- !u!114 &6162906160915416039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2937076165466971228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7145efb773aa474fa940262b0a9d7d4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buffRate: 2
 --- !u!114 &1211980407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,6 +388,19 @@ MonoBehaviour:
   _useSceneContext: 0
   _context: {fileID: 0}
   _bindType: 0
+--- !u!114 &6162906160915416039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2937076165466971228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7145efb773aa474fa940262b0a9d7d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffRate: 2
 --- !u!61 &1605049713211882513
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -427,19 +427,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3281252224923344913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3650141809357994773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83522bbbb4c3428eafc13d2ab6cadcdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buffRate: 2
 --- !u!114 &1394979242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,6 +445,19 @@ MonoBehaviour:
   _useSceneContext: 0
   _context: {fileID: 0}
   _bindType: 0
+--- !u!114 &3281252224923344913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3650141809357994773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83522bbbb4c3428eafc13d2ab6cadcdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffRate: 2
 --- !u!1001 &722847427989977060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -478,7 +478,7 @@ PrefabInstance:
     - target: {fileID: 7202906706472359750, guid: 3c2b4f4d60d26564db0b756af7bddaf5,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7604103140841079335, guid: 3c2b4f4d60d26564db0b756af7bddaf5,
         type: 3}

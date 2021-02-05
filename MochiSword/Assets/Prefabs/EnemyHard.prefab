@@ -120,7 +120,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -293,6 +293,11 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: -0.0090433955
       objectReference: {fileID: 0}
+    - target: {fileID: 490812191890827121, guid: 3c2b4f4d60d26564db0b756af7bddaf5,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7202906706472359750, guid: 3c2b4f4d60d26564db0b756af7bddaf5,
         type: 3}
       propertyPath: m_Name
@@ -301,7 +306,7 @@ PrefabInstance:
     - target: {fileID: 7202906706472359750, guid: 3c2b4f4d60d26564db0b756af7bddaf5,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7202906706472359750, guid: 3c2b4f4d60d26564db0b756af7bddaf5,
         type: 3}
