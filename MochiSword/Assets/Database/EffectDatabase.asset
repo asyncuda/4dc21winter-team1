@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slashEffect: {fileID: 8727936749381562358, guid: dd2a76d18a1235d4daacc4410d3ece22,
     type: 3}
-  specialSlashEffect: {fileID: 2766226302628393108, guid: e95567634c690ca41822de840509e296,
+  buffSlashEffect: {fileID: 2766226302628393108, guid: e95567634c690ca41822de840509e296,
     type: 3}
-  stabEffect: {fileID: 6036944574771377303, guid: 16ae2f2d1e240c8468cc92b99954e94c,
+  spearEffect: {fileID: 6036944574771377303, guid: 16ae2f2d1e240c8468cc92b99954e94c,
     type: 3}
-  specialStabEffect: {fileID: 1153903081255590495, guid: cbe6c5cc8b6c6a745b9478ffd451a64c,
+  buffSpearEffect: {fileID: 1153903081255590495, guid: cbe6c5cc8b6c6a745b9478ffd451a64c,
     type: 3}
-  enemyDeathEffect: {fileID: 4408268905545179189, guid: a717072ca8a72724c8728e491489a634,
+  enemyDefeatEffect: {fileID: 4408268905545179189, guid: a717072ca8a72724c8728e491489a634,
     type: 3}
