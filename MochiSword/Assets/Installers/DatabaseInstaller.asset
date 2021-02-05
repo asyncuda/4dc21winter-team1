@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundDatabase: {fileID: 11400000, guid: f3cc51e738a043447a9183dc42235e05, type: 2}
   statusDatabase: {fileID: 11400000, guid: 607c048638c75cf48a951179893a62ea, type: 2}
+  effectDatabase: {fileID: 11400000, guid: 03cc821c4ec671640b3b771c87011218, type: 2}
