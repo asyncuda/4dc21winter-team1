@@ -56,10 +56,6 @@ public class EnemyMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P)) {
             StartCoroutine("DeathEffect");
         }
-
-        if (Input.GetKeyDown(KeyCode.B)) {
-            ChangeCollider();
-        }
     }
     private void FixedUpdate()
     {
@@ -104,9 +100,24 @@ public class EnemyMovement : MonoBehaviour
         return !Physics2D.Raycast(start, dir, 3.0f, groundLayer);
     }
 
-    public void ChangeCollider()
+    public void ChangeCollider_Soft()
     {
-        // Collider を
+        // SoftMochi の Collider を入れ替える
+        if (col[0].enabled == true) {
+            col[0].enabled = false;
+            col[1].enabled = true;
+        } else if (col[1].enabled == true) {
+            col[1].enabled = false;
+            col[2].enabled = true;
+        } else {
+            col[2].enabled = false;
+            col[0].enabled = true;
+        }
+    }
+
+    public void ChangeCollider_Hard()
+    {
+        // HardMochi の Collider を入れ替える
         for (int i = 0; i < col.Length; i++) {
             col[i].enabled = !col[i].enabled;
         }
