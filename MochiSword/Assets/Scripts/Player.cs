@@ -68,11 +68,12 @@ public class Player : MonoBehaviour
         if (on_ground)
         {
             current_jump_time = 0;
-            FinishFall();
+            jump_state = JumpState.IDLE;
+            FinishFallAnim();
         }
         else
         {
-            StartFall();
+            StartFallAnim();
         }
         
         input_movement = GetHorizontalMovement();
@@ -91,7 +92,9 @@ public class Player : MonoBehaviour
             {
                 if (on_ground)
                 {
-                    StartJump();
+                    jump_sound.Play();
+                    jump_state = JumpState.JUMPING;
+                    StartJumpAnim();
                 }
             }
             else if (jump_state == JumpState.JUMPING)
@@ -107,7 +110,8 @@ public class Player : MonoBehaviour
             }
             else if (jump_state == JumpState.LAST)
             {
-                StartFall();
+                jump_state = JumpState.FALLING;
+                StartFallAnim();
             }
         }
         else
@@ -118,7 +122,8 @@ public class Player : MonoBehaviour
             }
             else if(jump_state == JumpState.LAST)
             {
-                StartFall();
+                jump_state = JumpState.FALLING;
+                StartFallAnim();
             }
         }
 
@@ -233,25 +238,21 @@ public class Player : MonoBehaviour
         return groundCheck.isGrounded();
     }
 
-    void StartJump()
+    void StartJumpAnim()
     {
-        jump_sound.Play();
         current_jump_time = 0;
         anim.SetBool("Jumping", true);
-        jump_state = JumpState.JUMPING;
     }
 
-    void StartFall()
+    void StartFallAnim()
     {
         anim.SetBool("Falling", true);
         anim.SetBool("Jumping", false);
-        jump_state = JumpState.FALLING;
     }
 
-    void FinishFall()
+    void FinishFallAnim()
     {
         anim.SetBool("Falling", false);
-        jump_state = JumpState.IDLE;
     }
 
     void Jump(float force)
