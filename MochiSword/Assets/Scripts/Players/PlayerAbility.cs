@@ -2,27 +2,29 @@
 using UnityEngine;
 
 namespace Players {
+    [RequireComponent(typeof(PlayerMediator))]
     public class PlayerAbility : MonoBehaviour {
-        [SerializeField] private int decreaseTime = default;
+        [SerializeField] private int maxSpecialPoint = default;
+        [SerializeField] private int attackGetPoint = default;
+        [SerializeField] private int hurtGetPoint = default;
+        [SerializeField] private int specialTime = default;
         private PlayerMediator mediator;
         private readonly FloatReactiveProperty specialPoint = new FloatReactiveProperty();
         private bool isBuffing;
-        private int maxSpecialPoint;
 
         private void Start() {
             mediator = GetComponent<PlayerMediator>();
-            maxSpecialPoint = mediator.PlayerData.MAXSpecialPoint;
-            mediator.OnSpecialPercentageChanged = specialPoint.Select(x =>(float) x / maxSpecialPoint);
+            mediator.OnSpecialPercentageChanged = specialPoint.Select(x => x / maxSpecialPoint);
 
             // 攻撃が当たったらポイント上昇
             mediator.OnSlashHit.AsUnitObservable()
                 .Merge(mediator.OnStabHit.AsUnitObservable())
-                .Subscribe(_ => specialPoint.Value += mediator.PlayerData.AttackGetPoint)
+                .Subscribe(_ => specialPoint.Value += attackGetPoint)
                 .AddTo(this);
 
             // ダメージを受けたらポイント上昇
             mediator.OnHealthChanged
-                .Subscribe(_ => specialPoint.Value += mediator.PlayerData.HurtGetPoint)
+                .Subscribe(_ => specialPoint.Value += hurtGetPoint)
                 .AddTo(this);
 
             // ポイントが最大になったらバフ
@@ -51,7 +53,7 @@ namespace Players {
         private void DecreasePoint() {
             Observable.EveryFixedUpdate()
                 .TakeWhile(_ => isBuffing)
-                .Select(_ => (float) maxSpecialPoint/decreaseTime)
+                .Select(_ => (float) maxSpecialPoint/specialTime)
                 .Subscribe(x => specialPoint.Value -= x * Time.deltaTime)
                 .AddTo(this);
         }

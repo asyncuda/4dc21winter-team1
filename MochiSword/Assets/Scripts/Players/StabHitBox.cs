@@ -8,6 +8,7 @@ namespace Players {
     [RequireComponent(typeof(PlayerMediator))]
     [RequireComponent(typeof(BoxCollider2D))]
     public class StabHitBox : MonoBehaviour {
+        [SerializeField] private float buffRate = default;
         [Inject] private PlayerMediator mediator = default;
 
         private void Start() {
@@ -25,7 +26,7 @@ namespace Players {
             var boxCollider = GetComponent<BoxCollider2D>();
             var size = boxCollider.size;
             mediator.IsBuffing
-                .Subscribe(x => boxCollider.size = size * (x ? mediator.PlayerData.AttackRangeBuffRate : 1))
+                .Subscribe(x => boxCollider.size = size * (x ? buffRate : 1))
                 .AddTo(this);
         }
     }
