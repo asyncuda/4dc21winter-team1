@@ -22,7 +22,8 @@ public class Player : MonoBehaviour
     {
         IDLE,
         JUMPING,
-        LAST
+        LAST,
+        FALLING
     }
 
     [SerializeField] private GameManager manager;
@@ -67,19 +68,30 @@ public class Player : MonoBehaviour
         if (on_ground)
         {
             current_jump_time = 0;
-            jump_state = JumpState.IDLE;
+            FinishFall();
+        }
+        else
+        {
+            StartFall();
         }
         
-        input_movement = GetHorizontalMovement() * move_speed;
+        input_movement = GetHorizontalMovement();
+        if(input_movement.magnitude > 0)
+        {
+            SetWalking(true);
+        }
+        else
+        {
+            SetWalking(false);
+        }
+
         if (Input.GetKey(KeyCode.Space))
         {
             if (jump_state == JumpState.IDLE)
             {
                 if (on_ground)
                 {
-                    jump_sound.Play();
-                    current_jump_time = 0;
-                    jump_state = JumpState.JUMPING;
+                    StartJump();
                 }
             }
             else if (jump_state == JumpState.JUMPING)
@@ -95,7 +107,7 @@ public class Player : MonoBehaviour
             }
             else if (jump_state == JumpState.LAST)
             {
-                jump_state = JumpState.IDLE;
+                StartFall();
             }
         }
         else
@@ -104,9 +116,9 @@ public class Player : MonoBehaviour
             {
                 jump_state = JumpState.LAST;
             }
-            else
+            else if(jump_state == JumpState.LAST)
             {
-                jump_state = JumpState.IDLE;
+                StartFall();
             }
         }
 
@@ -117,7 +129,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-        rb2d.AddForce(input_movement * Time.deltaTime);
+        rb2d.AddForce(input_movement * move_speed * Time.deltaTime);
 
         if (jump_state == JumpState.JUMPING)
         {
@@ -151,6 +163,7 @@ public class Player : MonoBehaviour
     {
         attack_state = AttackState.FURI;
         attack_furi.SetActive(true);
+        anim.SetTrigger("Furi");
         Invoke("HideAttack", 0.1f);
 
         NotifyAttackState(AttackState.FURI);
@@ -160,6 +173,7 @@ public class Player : MonoBehaviour
     {
         attack_state = AttackState.TUKI;
         attack_tuki.SetActive(true);
+        anim.SetTrigger("Tuki");
         Invoke("HideAttack", 0.1f);
 
         NotifyAttackState(AttackState.TUKI);
@@ -200,6 +214,11 @@ public class Player : MonoBehaviour
         return movement;
     }
 
+    void SetWalking(bool state)
+    {
+        anim.SetBool("Walking", state);
+    }
+
     void UpdateFlip(Direction dir)
     {
         if(dir != before_dir)
@@ -212,6 +231,27 @@ public class Player : MonoBehaviour
     bool IsGrounded()
     {
         return groundCheck.isGrounded();
+    }
+
+    void StartJump()
+    {
+        jump_sound.Play();
+        current_jump_time = 0;
+        anim.SetBool("Jumping", true);
+        jump_state = JumpState.JUMPING;
+    }
+
+    void StartFall()
+    {
+        anim.SetBool("Falling", true);
+        anim.SetBool("Jumping", false);
+        jump_state = JumpState.FALLING;
+    }
+
+    void FinishFall()
+    {
+        anim.SetBool("Falling", false);
+        jump_state = JumpState.IDLE;
     }
 
     void Jump(float force)
