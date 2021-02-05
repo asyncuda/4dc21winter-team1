@@ -21,6 +21,7 @@ public class EnemyMovement : MonoBehaviour
     private Vector2 vector;
     private Vector2 start, dir;
 
+    private PolygonCollider2D[] col;
 
     private void Start()
     {
@@ -28,6 +29,9 @@ public class EnemyMovement : MonoBehaviour
         rend     = GetComponent<Renderer>();
         animator = GetComponent<Animator>();
         var wait = new WaitForSeconds(0.2f);
+
+        col = GetComponents<PolygonCollider2D>();
+
     }
 
     private void Update()
@@ -51,6 +55,10 @@ public class EnemyMovement : MonoBehaviour
         // 点滅
         if (Input.GetKeyDown(KeyCode.P)) {
             StartCoroutine("DeathEffect");
+        }
+
+        if (Input.GetKeyDown(KeyCode.B)) {
+            ChangeCollider();
         }
     }
     private void FixedUpdate()
@@ -94,6 +102,14 @@ public class EnemyMovement : MonoBehaviour
     {
         // 崖際判定 (崖際ならTrue)
         return !Physics2D.Raycast(start, dir, 3.0f, groundLayer);
+    }
+
+    public void ChangeCollider()
+    {
+        // Collider を
+        for (int i = 0; i < col.Length; i++) {
+            col[i].enabled = !col[i].enabled;
+        }
     }
 
     private IEnumerator DeathEffect()
