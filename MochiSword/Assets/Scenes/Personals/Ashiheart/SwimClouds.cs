@@ -32,18 +32,6 @@ public class SwimClouds : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debugger.Log("start");
-
-        /*
-        GameObject dc1 = Instantiate(DarkCloud) as GameObject;
-
-        GameObject dc2 = Instantiate(DarkCloud) as GameObject;
-
-        dc1.transform.position = new Vector3(0, 0, 0);
-
-        dc2.transform.position = new Vector3(19, 0, 0);
-        */
-
         CloudMoving();
 
         SpecialTime();
@@ -66,6 +54,7 @@ public class SwimClouds : MonoBehaviour
                 .Append(DarkCloudLeft.transform.DOScale(Vector3.one * 1.0f, 0.5f))
                 .SetEase(Ease.Linear)
                 .SetLoops((int)SpecialAttackTime)
+                .SetLink(gameObject)
                 .Play();
             })
             .AppendInterval(SpecialAttackTime) // 待機
