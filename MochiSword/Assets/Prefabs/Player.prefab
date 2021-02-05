@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7105724114294647933}
   - component: {fileID: 5037306454837502258}
   - component: {fileID: 5191008710523537956}
+  - component: {fileID: 890621346}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -292,8 +293,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83716a2db7f41e1ad03868d17905002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 0
-  SpecialPercentage: 0
+  power: 5
+  buffRate: 2
+  attackSpecialPoint: 2
+  hurtSpecialPoint: 5
 --- !u!114 &5037306454837502258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed61e727348f44aeb1646782b44a66d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 10
 --- !u!114 &5191008710523537956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +328,22 @@ MonoBehaviour:
   _useSceneContext: 0
   _context: {fileID: 0}
   _bindType: 0
+--- !u!114 &890621346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110241488017856214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67dd966b7ec4525afa2f26cacc311a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpecialPoint: 10
+  attackGetPoint: 2
+  hurtGetPoint: 5
+  specialTime: 10
 --- !u!61 &4508524592188835743
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -350,20 +370,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
---- !u!114 &6583539909534129668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2937076165466971228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a83716a2db7f41e1ad03868d17905002, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 0
-  SpecialPercentage: 0
 --- !u!114 &6162906160915416039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,6 +382,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7145efb773aa474fa940262b0a9d7d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffRate: 2
+--- !u!114 &1211980407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2937076165466971228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 6162906160915416039}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!61 &1605049713211882513
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -402,20 +427,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2696747483491459931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3650141809357994773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a83716a2db7f41e1ad03868d17905002, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 0
-  SpecialPercentage: 0
 --- !u!114 &3281252224923344913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,6 +439,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83522bbbb4c3428eafc13d2ab6cadcdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffRate: 2
+--- !u!114 &1394979242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3650141809357994773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 3281252224923344913}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1001 &722847427989977060
 PrefabInstance:
   m_ObjectHideFlags: 0
