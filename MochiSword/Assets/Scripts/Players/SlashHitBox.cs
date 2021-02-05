@@ -6,16 +6,26 @@ using Zenject;
 
 namespace Players {
     [RequireComponent(typeof(PlayerMediator))]
-    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(BoxCollider2D))]
     public class SlashHitBox : MonoBehaviour {
         [Inject] private PlayerMediator mediator = default;
-        
+
         private void Start() {
-            // 接触したオブジェクトが特定のインターフェイスを実装していたらダメージを与える
-            this.OnTriggerEnter2DAsObservable()
+            // 接触したオブジェクトが特定のインターフェイスを実装していたら通知する
+            mediator.OnSlashHit = this.OnTriggerEnter2DAsObservable()
                 .Select(x => x.gameObject.GetComponent<IReceivableSlash>())
-                .Where(x => x != null)
-                .Subscribe(x => x.ReceiveDamage(mediator.power))
+                .Where(x => x != null);
+
+            // 通知が来たらダメージを与える
+            mediator.OnSlashHit
+                .Subscribe(x => x.ReceiveDamage(mediator.Power))
+                .AddTo(this);
+
+            // スペシャルが溜まったら判定を大きく
+            var boxCollider2D = GetComponent<BoxCollider2D>();
+            var size = boxCollider2D.size;
+            mediator.IsBuffing
+                .Subscribe(x => boxCollider2D.size = size * (x ? mediator.PlayerData.AttackRangeBuffRate : 1))
                 .AddTo(this);
         }
     }
