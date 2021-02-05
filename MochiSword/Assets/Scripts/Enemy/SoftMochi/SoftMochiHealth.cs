@@ -1,5 +1,7 @@
-﻿using UniRx;
+﻿using Library.Effects;
+using UniRx;
 using UnityEngine;
+using Zenject;
 
 namespace Enemy.SoftMochi {
     /// <summary>
@@ -8,11 +10,16 @@ namespace Enemy.SoftMochi {
     [RequireComponent(typeof(Collider2D))]
     public class SoftMochiHealth : MonoBehaviour, IReceivableStab {
         [SerializeField] private int health = default;
+        [Inject] private EffectPlayer effectPlayer = default;
+        [Inject] private EffectDatabase effectDatabase = default;
 
         private void Start() {
             this.ObserveEveryValueChanged(x => x.health)
                 .Where(x => x <= 0)
-                .Subscribe(_ => gameObject.SetActive(false))
+                .Subscribe(_ => {
+                    effectPlayer.Play(effectDatabase.EnemyDefeatEffect, transform.position);
+                    gameObject.SetActive(false);
+                })
                 .AddTo(this);
         }
 

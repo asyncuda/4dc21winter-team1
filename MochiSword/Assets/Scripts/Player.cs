@@ -2,7 +2,10 @@
 using Library.Scene;
 using System.Collections;
 using System.Collections.Generic;
+using Library.Effects;
+using Players;
 using UnityEngine;
+using Zenject;
 
 public class Player : MonoBehaviour
 {
@@ -45,6 +48,12 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int health = 3;
 
+    [SerializeField] private GameObject slashEffect;
+    [SerializeField] private GameObject buffSlashEffect;
+    [SerializeField] private GameObject spearEffect;
+    [SerializeField] private GameObject buffSpearEffect;
+
+    private PlayerMediator mediator;
     private Rigidbody2D rb2d;
     private Vector2 input_movement;
     private JumpState jump_state = JumpState.IDLE;
@@ -57,8 +66,8 @@ public class Player : MonoBehaviour
     private bool attack_cool = false;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
+        mediator = GetComponent<PlayerMediator>();
         rb2d = GetComponent<Rigidbody2D>();
 
         before_dir = Direction.RIGHT;
@@ -177,6 +186,8 @@ public class Player : MonoBehaviour
     {
         attack_state = AttackState.FURI;
         attack_furi.SetActive(true);
+        if (mediator.isBuffing) buffSlashEffect.SetActive(true);
+        else slashEffect.SetActive(true);
         anim.SetTrigger("Furi");
         NotifyAttackState(AttackState.FURI);
 
@@ -189,6 +200,8 @@ public class Player : MonoBehaviour
     {
         attack_state = AttackState.TUKI;
         attack_tuki.SetActive(true);
+        if (mediator.isBuffing) buffSpearEffect.SetActive(true);
+        else buffSpearEffect.SetActive(true);
         anim.SetTrigger("Tuki");
         NotifyAttackState(AttackState.TUKI);
 

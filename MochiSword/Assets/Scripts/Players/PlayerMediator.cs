@@ -17,8 +17,8 @@ namespace Players {
         [Inject] private StabHitBox stabHitBox = default;
         [Inject] private SlashHitBox slashHitBox = default;
         public IObservable<float> OnSpecialPercentageChanged;
+        public bool isBuffing { get; private set; }
         private PlayerAbility playerAbility;
-        private bool isBuffing;
 
         public int Health { get; private set; }
         public int Power { get; private set; }
