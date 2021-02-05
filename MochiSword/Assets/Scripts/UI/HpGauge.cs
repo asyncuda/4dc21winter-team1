@@ -31,13 +31,17 @@ public class HpGauge : MonoBehaviour
 
     void Start()
     {
-        int HealthMax = playerMediator.Health;
+        int HealthMax = 0; 
 
-        Debugger.Log("HealthMax " + HealthMax);
+        playerMediator
+            .ObserveEveryValueChanged(c => c.Health)
+            .Where(x => 0 < x).Take(1)
+            .Subscribe(x => { HealthMax = x; Debugger.Log("Health Max is " + x); });
 
-        playerMediator.ObserveEveryValueChanged(c => c.Health).Subscribe(x => Debugger.Log("subsc" + x));
-
-        hpPercentage        = playerMediator.ObserveEveryValueChanged(c => (float)c.Health / HealthMax).ToReactiveProperty<float>();
+        hpPercentage      = playerMediator
+            .ObserveEveryValueChanged(c => (float)c.Health / HealthMax)
+            .Where(_ => 0 < HealthMax)
+            .ToReactiveProperty<float>();
 
         specialPercentage = playerMediator.ObserveEveryValueChanged(c => c.SpecialPercentage).ToReactiveProperty<float>();
 
@@ -58,7 +62,6 @@ public class HpGauge : MonoBehaviour
                             x,
                             1.0f
                             );
-                        Debugger.Log("HP Changed, " +  x + ", " + hpPercentage.Value);
                     })
                     .AddTo(this);
 
