@@ -31,10 +31,9 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         // 反転判定
-        start = (transform.position - transform.right * 0.55f
-                     * transform.localScale.x) - transform.up * 0.25f;
-        dir = Vector2.down * 2.0f;
-        //Debug.DrawRay(start, dir, Color.blue);    // デバッグ用
+        start = (transform.position - transform.right * 0.5f * transform.localScale.x) - transform.right * 0.02f;
+        dir = Vector2.down;
+        //Debug.DrawRay(start, dir * 3.0f, Color.blue);    // デバッグ用
         if (IsInvert()) {
             Invert();
         }
@@ -92,7 +91,7 @@ public class EnemyMovement : MonoBehaviour
     private bool IsInvert()
     {
         // 崖際判定 (崖際ならTrue)
-        return !Physics2D.Raycast(start, dir, groundLayer);
+        return !Physics2D.Raycast(start, dir, 3.0f, groundLayer);
     }
 
     private IEnumerator DeathEffect()

@@ -136,7 +136,7 @@ PrefabInstance:
     - target: {fileID: 9091450147592704668, guid: 0be27a9dbc2f2a747978bd0cbabfd2d0,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9091450147592704670, guid: 0be27a9dbc2f2a747978bd0cbabfd2d0,
         type: 3}
@@ -146,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 9091450147592704670, guid: 0be27a9dbc2f2a747978bd0cbabfd2d0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 9091450147592704670, guid: 0be27a9dbc2f2a747978bd0cbabfd2d0,
         type: 3}
@@ -1312,25 +1312,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 9091450147592704664, guid: 4547ce9de1bcaee4db46563200fcda0c,
-        type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9091450147592704668, guid: 4547ce9de1bcaee4db46563200fcda0c,
         type: 3}
       propertyPath: m_Name
       value: EnemyHard
       objectReference: {fileID: 0}
+    - target: {fileID: 9091450147592704668, guid: 4547ce9de1bcaee4db46563200fcda0c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9091450147592704670, guid: 4547ce9de1bcaee4db46563200fcda0c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.6692796
+      value: 4.17
       objectReference: {fileID: 0}
     - target: {fileID: 9091450147592704670, guid: 4547ce9de1bcaee4db46563200fcda0c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.0826297
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 9091450147592704670, guid: 4547ce9de1bcaee4db46563200fcda0c,
         type: 3}
@@ -1380,12 +1380,12 @@ PrefabInstance:
     - target: {fileID: 9091450147592704670, guid: 4547ce9de1bcaee4db46563200fcda0c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9091450147592704670, guid: 4547ce9de1bcaee4db46563200fcda0c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4547ce9de1bcaee4db46563200fcda0c, type: 3}
@@ -1654,8 +1654,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -8, y: -2, z: -1}
-  m_Size: {x: 15, y: 2, z: 2}
+  m_Origin: {x: -8, y: -4, z: -1}
+  m_Size: {x: 15, y: 5, z: 2}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -1716,11 +1716,11 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1784752825}
     m_ColliderPaths:
-    - - X: -69999959
-        Y: -10000100
-      - X: -70000000
-        Y: -10000100
-      - X: -70000000
+    - - X: -39999959
+        Y: -19999900
+      - X: -39999900
+        Y: -19999959
+      - X: -39999900
         Y: -20000000
       - X: 60000000
         Y: -20000000
@@ -1735,13 +1735,13 @@ CompositeCollider2D:
       - X: -69999900
         Y: -10000000
       - X: -69999900
-        Y: -10000041
+        Y: -19999900
   m_CompositePaths:
     m_Paths:
     - - {x: 5.999971, y: -2}
       - {x: 5.999961, y: -1}
-      - {x: -7, y: -1.0000393}
-      - {x: -6.9999704, y: -2}
+      - {x: -6.9999905, y: -1.0000293}
+      - {x: -6.999961, y: -1.99999}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!19719996 &1784752825
