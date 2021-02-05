@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 
 namespace Players {
     /// <summary>
@@ -7,15 +8,20 @@ namespace Players {
     [RequireComponent(typeof(PlayerMediator))]
     [RequireComponent(typeof(Collider2D))]
     public class PlayerHealth : MonoBehaviour, IReceivableEnemyAttack {
+        private readonly IntReactiveProperty health = new IntReactiveProperty();
         private PlayerMediator mediator;
 
         private void Start() {
             mediator = GetComponent<PlayerMediator>();
+            health.Value = mediator.Health;
+
+            // 体力が変わったら通知
+            mediator.OnHealthChanged = health;
         }
 
 
         public void ReceiveDamage(int point) {
-            mediator.Health -= point;
+            health.Value -= point;
         }
     }
 }
