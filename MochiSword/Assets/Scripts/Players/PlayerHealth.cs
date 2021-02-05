@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using Library.Scene;
+using UniRx;
 using UnityEngine;
 
 namespace Players {
@@ -17,6 +18,10 @@ namespace Players {
 
             // 体力が変わったら通知
             mediator.OnHealthChanged = health;
+
+            health.Where(x => x <= 0)
+                .Subscribe(_ => SceneMover.Restart())
+                .AddTo(this);
         }
 
 
