@@ -12,7 +12,7 @@ public class HpGauge : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] private PlayerDummy playerMediator;
+    [SerializeField] private PlayerMediator playerMediator;
 
     [SerializeField] private Image hpGauge;
 
@@ -26,17 +26,22 @@ public class HpGauge : MonoBehaviour
 
     private void Awake()
     {
-        int HealthMax = playerMediator.Health;
-
-        hpPercentage        = playerMediator.ObserveEveryValueChanged(c => (float)c.Health / HealthMax).ToReactiveProperty<float>();
-
-        specialPercentage = playerMediator.ObserveEveryValueChanged(c => c.SpecialPercentage).ToReactiveProperty<float>();
-
         specialGauge.fillAmount = 0.0f;
     }
 
     void Start()
     {
+        int HealthMax = playerMediator.Health;
+
+        Debugger.Log("HealthMax " + HealthMax);
+
+        playerMediator.ObserveEveryValueChanged(c => c.Health).Subscribe(x => Debugger.Log("subsc" + x));
+
+        hpPercentage        = playerMediator.ObserveEveryValueChanged(c => (float)c.Health / HealthMax).ToReactiveProperty<float>();
+
+        specialPercentage = playerMediator.ObserveEveryValueChanged(c => c.SpecialPercentage).ToReactiveProperty<float>();
+
+
         SetHpGauge();
 
         SetSpecialGauge();
@@ -53,7 +58,7 @@ public class HpGauge : MonoBehaviour
                             x,
                             1.0f
                             );
-                        Debugger.Log("changed");
+                        Debugger.Log("HP Changed, " +  x + ", " + hpPercentage.Value);
                     })
                     .AddTo(this);
 
