@@ -11,7 +11,7 @@ namespace Players {
         [Inject] private StatusDatabase database;
         public int Health;
         public int power { get; private set; }
-        public int SpecialPoint;
+        public float SpecialPercentage;
 
         private void Start() {
             var status = database.GetData(CharacterType.Player) as PlayerData;
