@@ -177,7 +177,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b393abd6c646ef98365b5f58d66d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 10
 --- !u!114 &8261794075097399454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89708224c7314075b42d2b3ae5b68754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  power: 2
 --- !u!114 &4656532279103544963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fb4bde3745473bb28ef773f321baa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 0
 --- !u!95 &4865963692530002626
 Animator:
   serializedVersion: 3
@@ -330,6 +331,11 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.12
       objectReference: {fileID: 0}
+    - target: {fileID: 490812191890827121, guid: 3c2b4f4d60d26564db0b756af7bddaf5,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7202906706472359750, guid: 3c2b4f4d60d26564db0b756af7bddaf5,
         type: 3}
       propertyPath: m_Name
@@ -338,7 +344,7 @@ PrefabInstance:
     - target: {fileID: 7202906706472359750, guid: 3c2b4f4d60d26564db0b756af7bddaf5,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7202906706472359750, guid: 3c2b4f4d60d26564db0b756af7bddaf5,
         type: 3}

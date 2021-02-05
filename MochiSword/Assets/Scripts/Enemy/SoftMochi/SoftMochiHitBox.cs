@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using Players;
+using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Enemy.SoftMochi {
         private void Start() {
             // 接触したオブジェクトが特定のインターフェイスを実装していたらダメージを与える
             this.OnTriggerEnter2DAsObservable()
-                .Select(x => x.gameObject.GetComponent<IReceivableStab>())
+                .Select(x => x.gameObject.GetComponent<IReceivableEnemyAttack>())
                 .Where(x => x != null)
                 .Subscribe(x => x.ReceiveDamage(power))
                 .AddTo(this);

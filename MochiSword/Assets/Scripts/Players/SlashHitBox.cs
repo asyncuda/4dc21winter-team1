@@ -5,29 +5,34 @@ using UnityEngine;
 using Zenject;
 
 namespace Players {
-    [RequireComponent(typeof(PlayerMediator))]
     [RequireComponent(typeof(BoxCollider2D))]
     public class SlashHitBox : MonoBehaviour {
         [SerializeField] private float buffRate = default;
         [Inject] private PlayerMediator mediator = default;
+        private BoxCollider2D boxCollider2D;
+        private Vector2 colliderSize;
 
         private void Start() {
-            // 接触したオブジェクトが特定のインターフェイスを実装していたら通知する
-            mediator.OnSlashHit = this.OnTriggerEnter2DAsObservable()
+            boxCollider2D = GetComponent<BoxCollider2D>();
+            colliderSize = boxCollider2D.size;
+            
+            this.OnTriggerEnter2DAsObservable()
                 .Select(x => x.gameObject.GetComponent<IReceivableSlash>())
-                .Where(x => x != null);
-
-            // 通知が来たらダメージを与える
-            mediator.OnSlashHit
-                .Subscribe(x => x.ReceiveDamage(mediator.Power))
+                .Where(x => x != null)
+                .Subscribe(x => {
+                    x.ReceiveDamage(mediator.Power);
+                    mediator.OnAttackHit();
+                })
                 .AddTo(this);
+            gameObject.SetActive(false);
+        }
 
-            // スペシャルが溜まったら判定を大きく
-            var boxCollider2D = GetComponent<BoxCollider2D>();
-            var size = boxCollider2D.size;
-            mediator.IsBuffing
-                .Subscribe(x => boxCollider2D.size = size * (x ? buffRate : 1))
-                .AddTo(this);
+        public void StartBuff() {
+            boxCollider2D.size = colliderSize * buffRate;
+        }
+
+        public void StopBuff() {
+            boxCollider2D.size = colliderSize;
         }
     }
 }
