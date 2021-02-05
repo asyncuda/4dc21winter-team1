@@ -104,5 +104,6 @@ public class EnemyMovement : MonoBehaviour
             rend.enabled = !rend.enabled;
             yield return wait;
         }
+        Destroy(this.gameObject);
     }
 }
