@@ -1,4 +1,5 @@
 ﻿using System;
+using Character;
 using Enemy;
 using UniRx;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Players {
     /// <summary>
     /// プレイヤーの情報をまとめるクラス
     /// </summary>
-    public class PlayerMediator : MonoBehaviour {
+    public class PlayerMediator : MediatorBase {
         [SerializeField] private int power = default;
         [SerializeField] private float buffRate = default;
         [SerializeField] private int attackSpecialPoint = default;
@@ -24,6 +25,7 @@ namespace Players {
         public float SpecialPercentage { get; private set; }
 
         private void Awake() {
+            Initialize();
             playerAbility = GetComponent<PlayerAbility>();
             this.ObserveEveryValueChanged(x => isBuffing)
                 .Subscribe(x => Power = (int) (power * (x ? buffRate : 1)))

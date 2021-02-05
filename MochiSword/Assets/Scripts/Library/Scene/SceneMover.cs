@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Library.Pause;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,6 +22,7 @@ namespace Library.Scene {
         public static async UniTaskVoid MoveAsync(Scenes scene) {
             if (isSceneChanging) return;
             isSceneChanging = true;
+            Pauser.Clear();
             await ScreenFader.FadeOutAsync(FadeTime);
             await SceneManager.LoadSceneAsync((int) scene);
             await ScreenFader.FadeInAsync(FadeTime);
