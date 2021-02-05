@@ -31,8 +31,8 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         // 反転判定
-        start = (transform.position - transform.right * 1.2f 
-                    * Mathf.Sign(transform.localScale.x)) - transform.up * 0.5f;
+        start = (transform.position - transform.right * 0.55f
+                     * transform.localScale.x) - transform.up * 0.25f;
         dir = Vector2.down * 2.0f;
         //Debug.DrawRay(start, dir, Color.blue);    // デバッグ用
         if (IsInvert()) {

@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isXMove: 1
-  xSpeed: 2
   isJump: 1
+  xSpeed: 2
   groundCheck: {fileID: 3479487634005117284}
   groundLayer:
     serializedVersion: 2
