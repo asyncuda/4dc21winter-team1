@@ -1,0 +1,138 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
+using UniRx;
+using DG.Tweening;
+using Players;
+using Library;
+
+public class HpGauge : MonoBehaviour
+{
+    // Start is called before the first frame update
+
+    [SerializeField] private PlayerDummy playerMediator;
+
+    [SerializeField] private Image hpGauge;
+
+    [SerializeField] private Image specialGauge;
+
+    [SerializeField] private List<GameObject> SpecialGaugeIcon;
+
+    private IReadOnlyReactiveProperty<float> hpPercentage;
+
+    private IReadOnlyReactiveProperty<float> specialPercentage;
+
+    private void Awake()
+    {
+        int HealthMax = playerMediator.Health;
+
+        hpPercentage        = playerMediator.ObserveEveryValueChanged(c => (float)c.Health / HealthMax).ToReactiveProperty<float>();
+
+        specialPercentage = playerMediator.ObserveEveryValueChanged(c => c.SpecialPercentage).ToReactiveProperty<float>();
+
+        specialGauge.fillAmount = 0.0f;
+    }
+
+    void Start()
+    {
+        SetHpGauge();
+
+        SetSpecialGauge();
+    }
+
+    private void SetHpGauge()
+    {
+        hpPercentage.Subscribe(
+                    x =>
+                    {
+                        DOTween.To(
+                            () => hpGauge.fillAmount,
+                            num => hpGauge.fillAmount = num,
+                            x,
+                            1.0f
+                            );
+                        Debugger.Log("changed");
+                    })
+                    .AddTo(this);
+
+        hpGauge
+            .ObserveEveryValueChanged(c => c.fillAmount)
+            .Where(x => 0f <= x && x < 0.34)
+            .Subscribe(_ => hpGauge.color = Color.red)
+            ;
+
+        hpGauge
+            .ObserveEveryValueChanged(c => c.fillAmount)
+            .Where(x => 0.34 <= x && x < 0.67)
+            .Subscribe(_ => hpGauge.color = Color.yellow)
+            ;
+
+        hpGauge
+            .ObserveEveryValueChanged(c => c.fillAmount)
+            .Where(x => 0.67 <= x)
+            .Subscribe(_ => hpGauge.color = Color.green)
+            ;
+    }
+
+    private void SetSpecialGauge()
+    {
+        specialPercentage.Subscribe(
+            x =>
+            {
+                DOTween.To(
+                    () => specialGauge.fillAmount,
+                    num => specialGauge.fillAmount = num,
+                    x,
+                    1.0f
+                    );
+                specialGauge.color = new Color(255, 255, 0, specialPercentage.Value + 0.1f);
+                Debugger.Log("special percentage changed");
+            })
+            .AddTo(this);
+
+        specialGauge
+            .ObserveEveryValueChanged(c => c.fillAmount)
+            .Where(x => 0f <= x && x < 0.25f)
+            .Subscribe(_ => SetIconUnique(-1)) 
+            ;
+
+        specialGauge
+            .ObserveEveryValueChanged(c => c.fillAmount)
+            .Where(x => 0.25f <= x && x < 0.5f)
+            .Subscribe(_ => SetIconUnique(0))
+            ;
+
+        // ここは仕様です
+        specialGauge
+            .ObserveEveryValueChanged(c => c.fillAmount)
+            .Where(x => 0.5f <= x)
+            .Subscribe(_ => SetIconUnique(1))
+            ;
+
+        specialGauge
+            .ObserveEveryValueChanged(c => c.fillAmount)
+            .Where(x => 0.99f <= x)
+            .Subscribe(_ => SetIconUnique(2))
+            ;
+    }
+
+    private void SetIconUnique(int index)
+    {
+        foreach (var s in SpecialGaugeIcon)
+        {
+            s.SetActive(false);
+        }
+
+        if(index != -1) SpecialGaugeIcon[index].SetActive(true);
+    }
+
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
