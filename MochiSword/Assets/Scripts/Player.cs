@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
             jump_state = JumpState.IDLE;
             FinishFallAnim();
         }
-        else
+        else if(jump_state == JumpState.IDLE)
         {
             StartFallAnim();
         }
