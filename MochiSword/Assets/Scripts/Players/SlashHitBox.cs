@@ -24,6 +24,7 @@ namespace Players {
                     mediator.OnAttackHit();
                 })
                 .AddTo(this);
+            gameObject.SetActive(false);
         }
 
         public void StartBuff() {

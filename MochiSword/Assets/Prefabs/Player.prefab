@@ -297,6 +297,8 @@ MonoBehaviour:
   buffRate: 2
   attackSpecialPoint: 2
   hurtSpecialPoint: 5
+  stabHitBox: {fileID: 3281252224923344913}
+  slashHitBox: {fileID: 6162906160915416039}
 --- !u!114 &5037306454837502258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,8 +343,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpecialPoint: 10
-  attackGetPoint: 2
-  hurtGetPoint: 5
   specialTime: 10
 --- !u!61 &4508524592188835743
 BoxCollider2D:

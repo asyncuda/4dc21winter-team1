@@ -5,8 +5,6 @@ namespace Players {
     [RequireComponent(typeof(PlayerMediator))]
     public class PlayerAbility : MonoBehaviour {
         [SerializeField] private int maxSpecialPoint = default;
-        [SerializeField] private int attackGetPoint = default;
-        [SerializeField] private int hurtGetPoint = default;
         [SerializeField] private int specialTime = default;
         private PlayerMediator mediator;
         private readonly FloatReactiveProperty specialPoint = new FloatReactiveProperty(0.0f);
@@ -41,9 +39,12 @@ namespace Players {
         /// </summary>
         private void DecreasePoint() {
             Observable.EveryFixedUpdate()
-                .TakeWhile(_ => specialPoint.Value <= 0)
+                .TakeWhile(_ => specialPoint.Value >= 0)
                 .Select(_ => (float) maxSpecialPoint/specialTime)
-                .Subscribe(x => specialPoint.Value -= x * Time.deltaTime)
+                .Subscribe(x => {
+                    specialPoint.Value -= x * Time.deltaTime;
+                    if (specialPoint.Value <= 0) specialPoint.Value = 0;
+                })
                 .AddTo(this);
         }
     }
