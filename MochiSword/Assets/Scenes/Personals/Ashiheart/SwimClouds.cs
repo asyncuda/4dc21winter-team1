@@ -58,7 +58,7 @@ public class SwimClouds : MonoBehaviour
         var LeftSeq = DOTween.Sequence();
 
         LeftSeq
-            .Append(DarkCloudLeft.transform.DOMove(LeftInitialPosition + Vector3.left * 5, 2)) //開く
+            .Append(DarkCloudLeft.transform.DOLocalMove(LeftInitialPosition + Vector3.left * 5, 2)) //開く
             .AppendCallback(() =>
             {
                 DOTween.Sequence()
@@ -69,14 +69,14 @@ public class SwimClouds : MonoBehaviour
                 .Play();
             })
             .AppendInterval(SpecialAttackTime) // 待機
-            .Append(DarkCloudLeft.transform.DOMove(LeftInitialPosition, 3)) // 閉じる
+            .Append(DarkCloudLeft.transform.DOLocalMove(LeftInitialPosition, 3)) // 閉じる
             .Play()
             ;
 
         var RightSeq = DOTween.Sequence();
 
          RightSeq
-            .Append(DarkCloudRight.transform.DOMove(RightInitialPosition + Vector3.right* 5, 2)) //開く
+            .Append(DarkCloudRight.transform.DOLocalMove(RightInitialPosition + Vector3.right* 5, 2)) //開く
             .AppendCallback(() =>
             {
                 DOTween.Sequence()
@@ -87,7 +87,7 @@ public class SwimClouds : MonoBehaviour
                 .Play();
             })
             .AppendInterval(SpecialAttackTime) // 待機
-            .Append(DarkCloudRight.transform.DOMove(RightInitialPosition, 3)) // 閉じる
+            .Append(DarkCloudRight.transform.DOLocalMove(RightInitialPosition, 3)) // 閉じる
             .Play()
             ;
     }
