@@ -1,4 +1,5 @@
 ﻿using Library;
+using Library.Scene;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -288,7 +289,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("You Dead!");
         KillPlayerAnim();
-        manager.GameOver();
+        SceneMover.MoveAsync(Scenes.Game).Forget();
     }
 
     void KillPlayerAnim()
