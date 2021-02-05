@@ -2,6 +2,7 @@
     public enum Scenes {
         Title = 0,
         Game = 1,
-        Result = 2
+        Boss = 2,
+        Result = 3
     }
 }
