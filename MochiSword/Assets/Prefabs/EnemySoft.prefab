@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9091450147592704664}
   - component: {fileID: 4865963692530002626}
   m_Layer: 0
-  m_Name: EnemyHard
+  m_Name: EnemySoft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,11 +146,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isXMove: 1
-  isInvert: 1
   xSpeed: 2
-  invertTime: 2
   isJump: 1
   groundCheck: {fileID: 3479487634005117284}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!95 &4865963692530002626
 Animator:
   serializedVersion: 3

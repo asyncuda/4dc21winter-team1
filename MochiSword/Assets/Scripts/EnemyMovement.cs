@@ -5,14 +5,12 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] bool isXMove = true;       // 横移動するかどうか
-    [SerializeField] bool isInvert = true;      // 反転するかどうか
-    [SerializeField] float xSpeed = 2.0f;       // 秒間速度 (block/sec)
-    [SerializeField] float invertTime = 2.0f;   // 往復時間 (sec)
     [SerializeField] bool isJump = true;        // ジャンプするかどうか
+    [SerializeField] float xSpeed = 2.0f;       // 秒間速度 (block/sec)
     [SerializeField] GroundCheck groundCheck = default;   // 接地判定
+    [SerializeField] LayerMask groundLayer = default;     // 崖際判定
 
-    private float currentTime = 0f;     // 横移動用
-    private float currentTime2 = 0f;    // ジャンプ用
+    private float currentTime = 0f;     // ジャンプ用
     private float jumpTime = 3.0f;      // ジャンプの時間間隔 (sec)
     private float jumpPower = 4.0f;     // ジャンプの高さ
     private bool isGrounded;            // 接地判定に必要
@@ -20,6 +18,7 @@ public class EnemyMovement : MonoBehaviour
     private Renderer rend;
     private Animator animator;
     private Vector2 vector;
+    private Vector2 start, dir;
 
     private void Start()
     {
@@ -32,10 +31,14 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         // 反転判定
-        if (isInvert) {
+        start = (transform.position - transform.right * 1.2f 
+                    * Mathf.Sign(transform.localScale.x)) - transform.up * 0.5f;
+        dir = Vector2.down * 2.0f;
+        //Debug.DrawRay(start, dir, Color.blue);    // デバッグ用
+        if (IsInvert()) {
             Invert();
         }
-
+        
         // 小ジャンプ判定
         if (isJump) {
             Jump();
@@ -43,6 +46,8 @@ public class EnemyMovement : MonoBehaviour
 
         isGrounded = groundCheck.isGrounded(); // 接地判定
 
+
+        // 点滅
         if (Input.GetKeyDown(KeyCode.P)) {
             StartCoroutine("DeathEffect");
         }
@@ -67,25 +72,27 @@ public class EnemyMovement : MonoBehaviour
     private void Invert()
     {
         // 反転処理
-        currentTime += Time.deltaTime;
-        if (currentTime > invertTime) {
-            xSpeed = -xSpeed;
-            currentTime = 0f;
-        }
+        xSpeed = -xSpeed;
     }
 
     private void Jump()
     {
         // 小ジャンプ処理
-        currentTime2 += Time.deltaTime;
-        if (currentTime2 > jumpTime) {
+        currentTime += Time.deltaTime;
+        if (currentTime > jumpTime) {
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            currentTime2 = 0f;
-        } else if (currentTime2 > jumpTime - 0.4f){
+            currentTime = 0f;
+        } else if (currentTime > jumpTime - 0.4f){
             animator.SetBool("isJump", true);
-        } else if (currentTime2 > 0.4f && isGrounded) {
+        } else if (currentTime > 0.4f && isGrounded) {
             animator.SetBool("isJump", false);
         }
+    }
+
+    private bool IsInvert()
+    {
+        // 崖際判定 (崖際ならTrue)
+        return !Physics2D.Raycast(start, dir, groundLayer);
     }
 
     private IEnumerator DeathEffect()
