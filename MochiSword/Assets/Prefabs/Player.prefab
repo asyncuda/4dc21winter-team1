@@ -133,6 +133,7 @@ MonoBehaviour:
   groundCheck: {fileID: 4929998806419383632}
   attack_tuki: {fileID: 3650141809357994773}
   attack_furi: {fileID: 2937076165466971228}
+  attack_wait: 0.3
   jump_sound: {fileID: 4685251662122518396}
   move_speed: 16000
   jump_force: 600

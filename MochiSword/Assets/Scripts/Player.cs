@@ -33,13 +33,15 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject attack_tuki;
     [SerializeField] private GameObject attack_furi;
+    [SerializeField] private float attack_time = 0.1f;
+    [SerializeField] private float attack_wait_time = 1f;
+
     [SerializeField] private AudioSource jump_sound;
 
     [SerializeField] private float move_speed = 100f;
     [SerializeField] private float jump_force = 100f;
     [SerializeField] private float last_jump_force = 500f;
     [SerializeField] private float max_jump_time = 0.5f;
-    [SerializeField] private Direction start_direction = Direction.RIGHT;
 
     [SerializeField] private int health = 3;
 
@@ -51,6 +53,8 @@ public class Player : MonoBehaviour
     private AttackState attack_state = AttackState.IDLE;
 
     private Direction before_dir;
+
+    private bool attack_cool = false;
 
     // Start is called before the first frame update
     void Start()
@@ -152,37 +156,56 @@ public class Player : MonoBehaviour
 
     void UpdateAttack()
     {
+        if (attack_cool) return;
+
         if (attack_state == AttackState.IDLE)
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                AttackFURI();
+                StartCoroutine(AttackFURI());
+                StartCoroutine(SetAttackCoolTime(attack_wait_time));
             }
             else if (Input.GetKeyDown(KeyCode.X))
             {
-                AttackTUKI();
+                StartCoroutine(AttackTUKI());
+                StartCoroutine(SetAttackCoolTime(attack_wait_time));
             }
         }
     }
 
-    void AttackFURI()
+    IEnumerator AttackFURI()
     {
         attack_state = AttackState.FURI;
         attack_furi.SetActive(true);
         anim.SetTrigger("Furi");
-        Invoke("HideAttack", 0.1f);
-
         NotifyAttackState(AttackState.FURI);
+
+        yield return new WaitForSeconds(attack_time);
+
+        HideAttack();
     }
 
-    void AttackTUKI()
+    IEnumerator AttackTUKI()
     {
         attack_state = AttackState.TUKI;
         attack_tuki.SetActive(true);
         anim.SetTrigger("Tuki");
-        Invoke("HideAttack", 0.1f);
-
         NotifyAttackState(AttackState.TUKI);
+
+        yield return new WaitForSeconds(attack_time);
+        
+        HideAttack();
+    }
+
+    IEnumerator SetAttackCoolTime(float time)
+    {
+        attack_cool = true;
+
+        yield return new WaitForSeconds(time);
+
+        attack_cool = false;
+
+        Debugger.Log("CoolTime is break");
     }
 
     void HideAttack()
