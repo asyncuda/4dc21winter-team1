@@ -32,8 +32,14 @@ namespace Library.Scene {
         /// <summary>
         /// リスタートする
         /// </summary>
-        public static void Restart() {
-            Move(Scenes.Game, RestartTime).Forget();
+        public static async UniTaskVoid Restart() {
+            if (isSceneChanging) return;
+            isSceneChanging = true;
+            await ScreenFader.FadeOutAsync(RestartTime);
+            await SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+            await ScreenFader.FadeInAsync(RestartTime);
+            isSceneChanging = false;
+            
         }
 
         private static async UniTaskVoid Move(Scenes scene, float time) {
