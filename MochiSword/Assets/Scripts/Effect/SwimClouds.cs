@@ -18,6 +18,12 @@ public class SwimClouds : MonoBehaviour
 
     [SerializeField] private float CloudBound;
 
+    private Sequence Bound = DOTween.Sequence();
+
+    private Sequence Open   = DOTween.Sequence();
+
+    private Sequence Close   = DOTween.Sequence();
+
 
     private Vector3 LeftInitialPosition; 
 
@@ -25,9 +31,6 @@ public class SwimClouds : MonoBehaviour
 
     private void Awake()
     {
-        DOTween.Init();
-        DOTween.defaultAutoPlay = AutoPlay.None;
-
         LeftInitialPosition = DarkCloudLeft.transform.position;
 
         RightInitialPosition = DarkCloudRight.transform.position;
@@ -38,8 +41,49 @@ public class SwimClouds : MonoBehaviour
     {
         playerMediator
             .OnSpecialPercentageChanged
-            .Where(x => 0.99f < x)
-            .Subscribe(_ => SpecialTime());
+            .Where(x => playerMediator.isBuffing)
+            .Subscribe(_ => Open.Restart());
+
+        playerMediator.OnSpecialPercentageChanged
+            .Where(_ => playerMediator.isBuffing)
+            .Where(_ => !Open.IsPlaying())
+            .Subscribe(_ => Bound.Restart())
+            ;
+
+        playerMediator.OnSpecialPercentageChanged
+            .Where(_ => !playerMediator.isBuffing)
+            .Where(_ => !Bound.IsPlaying())
+            .Subscribe(_ => Close.Restart())
+            ;
+
+        Open
+            .Append(DarkCloudRight.transform.DOLocalMove(RightInitialPosition + Vector3.right * 5, 2)) //開く
+            .Append(DarkCloudLeft.transform.DOLocalMove(LeftInitialPosition + Vector3.left * 5, 2)) //開く
+            .Pause()
+            //.SetLoops(0)
+            .SetAutoKill(false)
+            .SetLink(gameObject)
+            ;
+
+        Bound
+            .Append(DarkCloudLeft.transform.DOScale(Vector3.one * CloudBound, 0.5f))
+            .Join(DarkCloudRight.transform.DOScale(Vector3.one * CloudBound, 0.5f))
+            .Append(DarkCloudLeft.transform.DOScale(Vector3.one * 1.0f, 0.5f))
+            .Join(DarkCloudRight.transform.DOScale(Vector3.one * 1.0f, 0.5f))
+            .SetEase(Ease.Linear)
+            .Pause()
+            .SetLoops(-1)
+            .SetLink(gameObject)
+            ;
+
+        Close
+            .Append(DarkCloudLeft.transform.DOLocalMove(LeftInitialPosition, 3)) // 閉じる
+            .Join(DarkCloudRight.transform.DOLocalMove(RightInitialPosition, 3)) // 閉じる
+            .Pause()
+            .SetLoops(0)
+            .SetAutoKill(false)
+            .SetLink(gameObject)
+            ;
     }
 
     private void CloudMoving()

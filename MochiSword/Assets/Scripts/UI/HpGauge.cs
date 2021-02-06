@@ -124,13 +124,13 @@ public class HpGauge : MonoBehaviour
 
         specialGauge
             .ObserveEveryValueChanged(c => c.fillAmount)
-            .Where(x => 0.5f <= x)
+            .Where(x => 0.5f <= x && x < 1.0f)
             .Subscribe(_ => SetIconUnique(1))
             ;
 
         specialGauge
             .ObserveEveryValueChanged(c => c.fillAmount)
-            .Where(x => 0.99f <= x)
+            .Where(_ => playerMediator.isBuffing)
             .Subscribe(_ => SetIconUnique(2))
             ;
     }
