@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 890621346}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83716a2db7f41e1ad03868d17905002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 5
+  power: 1
   buffRate: 2
   attackSpecialPoint: 2
   hurtSpecialPoint: 5
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed61e727348f44aeb1646782b44a66d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 5
 --- !u!114 &5191008710523537956
 MonoBehaviour:
   m_ObjectHideFlags: 0

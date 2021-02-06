@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b393abd6c646ef98365b5f58d66d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 1
 --- !u!114 &8261794075097399454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89708224c7314075b42d2b3ae5b68754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 2
+  power: 1
 --- !u!114 &4656532279103544963
 MonoBehaviour:
   m_ObjectHideFlags: 0
