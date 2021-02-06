@@ -24,7 +24,7 @@ namespace Players {
             mediator = GetComponent<PlayerMediator>();
 
             specialPoint
-                .Subscribe(x => mediator.OnSpecialChanged(x/maxSpecialPoint))
+                .Subscribe(x => mediator.OnSpecialChanged(x / maxSpecialPoint))
                 .AddTo(this);
 
             // ポイントが最大になったらバフ
@@ -49,7 +49,9 @@ namespace Players {
         }
 
         public void CreasePoint(int point) {
+            if (isBuffing) return;
             specialPoint.Value += point;
+            if (specialPoint.Value >= maxSpecialPoint) specialPoint.Value = maxSpecialPoint;
         }
 
         /// <summary>
@@ -58,7 +60,7 @@ namespace Players {
         private void DecreasePoint() {
             Observable.Interval(TimeSpan.FromSeconds(1))
                 .TakeWhile(_ => specialPoint.Value >= 0)
-                .Select(_ => (float) maxSpecialPoint/specialTime)
+                .Select(_ => (float) maxSpecialPoint / specialTime)
                 .Subscribe(x => {
                     specialPoint.Value -= x;
                     if (specialPoint.Value <= 0) specialPoint.Value = 0;
