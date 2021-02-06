@@ -1,3 +1,17 @@
-﻿fileFormatVersion: 2
+fileFormatVersion: 2
 guid: 601b78b9ad6948fab57181b8fbabb265
-timeCreated: 1612433095
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - jumpClip: {fileID: 8300000, guid: beb30f1c2faf2ed45b5d5f6bccb87176, type: 3}
+  - damageClip: {fileID: 8300000, guid: 826d266adb00dd840b65cb294b44cb2e, type: 3}
+  - killEnemyClip: {fileID: 8300000, guid: 681abd6e6575135498034ad6d9ae9d84, type: 3}
+  - furiClip: {instanceID: 0}
+  - tukiClip: {instanceID: 0}
+  - gameStartClip: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -28,7 +28,7 @@ namespace Players {
         }
         
         public void ReceiveDamage(int point) {
-            sePlayer.PlayOneShot(soundDatabase.KillEnemyClip);
+            sePlayer.PlayOneShot(soundDatabase.DamageClip);
             health -= point;
             mediator.OnHealthChanged(health);
         }

@@ -24,7 +24,7 @@ namespace Players {
                 .Select(x => x.gameObject.GetComponent<IReceivableSlash>())
                 .Where(x => x != null)
                 .Subscribe(x => {
-                    sePlayer.PlayOneShot(soundDatabase.GameStartClip);
+                    sePlayer.PlayOneShot(soundDatabase.KillEnemyClip);
                     x.ReceiveDamage(mediator.Power);
                     mediator.OnAttackHit();
                 })
