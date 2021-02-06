@@ -200,7 +200,7 @@ public class Player : MonoBehaviour
         attack_state = AttackState.TUKI;
         attack_tuki.SetActive(true);
         if (mediator.isBuffing) buffSpearEffect.SetActive(true);
-        else buffSpearEffect.SetActive(true);
+        else spearEffect.SetActive(true);
         anim.SetTrigger("Tuki");
 
         yield return new WaitForSeconds(attack_time);
