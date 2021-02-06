@@ -11,7 +11,7 @@ namespace Players {
     [RequireComponent(typeof(PlayerMediator))]
     [RequireComponent(typeof(Collider2D))]
     public class PlayerHealth : MonoBehaviour, IReceivableEnemyAttack {
-        [SerializeField] private int health = default;
+        [SerializeField] public int health = default;
         private PlayerMediator mediator;
 
         [Inject] SePlayer sePlayer;
