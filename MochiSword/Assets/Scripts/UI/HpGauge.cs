@@ -14,6 +14,8 @@ public class HpGauge : MonoBehaviour
 
     [SerializeField] private PlayerMediator playerMediator;
 
+    [SerializeField] private PlayerHealth playerHealth;
+    
     [SerializeField] private Image hpGauge;
 
     [SerializeField] private Image specialGauge;
@@ -32,15 +34,18 @@ public class HpGauge : MonoBehaviour
 
     void Start()
     {
-        int HealthMax = 0;
+        int HealthMax = 5;
 
+        /*
+        // init HealthMax
         playerMediator
             .ObserveEveryValueChanged(c => c.Health)
             .Where(x => 0 < x).Take(1)
             .Subscribe(x => { HealthMax = x; Debugger.Log("Health Max is " + x); });
+        */
 
-        hpPercentage = playerMediator
-            .ObserveEveryValueChanged(c => (float)c.Health / HealthMax)
+        hpPercentage = playerHealth
+            .ObserveEveryValueChanged(c => (float)c.health / HealthMax)
             .Where(_ => 0 < HealthMax)
             .ToReactiveProperty<float>();
 

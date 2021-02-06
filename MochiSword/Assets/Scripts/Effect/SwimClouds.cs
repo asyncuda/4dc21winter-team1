@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Library;
 using DG.Tweening;
+using UniRx;
 using Players;
 
 public class SwimClouds : MonoBehaviour
 {
     [SerializeField] private PlayerMediator playerMediator; 
-
 
     [SerializeField] private GameObject DarkCloudLeft;
 
@@ -36,13 +36,15 @@ public class SwimClouds : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CloudMoving();
-
-        SpecialTime();
+        playerMediator
+            .OnSpecialPercentageChanged
+            .Where(x => 0.99f < x)
+            .Subscribe(_ => SpecialTime());
     }
 
     private void CloudMoving()
     {
+        return;
     }
 
     private void SpecialTime()
@@ -83,12 +85,5 @@ public class SwimClouds : MonoBehaviour
             .Append(DarkCloudRight.transform.DOLocalMove(RightInitialPosition, 3)) // 閉じる
             .Play()
             ;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        
     }
 }
