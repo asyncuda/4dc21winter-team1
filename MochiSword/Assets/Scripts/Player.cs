@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
 
         before_dir = Direction.RIGHT;
 
-        HideAttack();
+        // HideAttack();
     }
 
     void Update()
