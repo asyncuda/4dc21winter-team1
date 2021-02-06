@@ -3,6 +3,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using Zenject;
+using Library.Audio;
 
 namespace Players {
     [RequireComponent(typeof(BoxCollider2D))]
@@ -12,6 +13,9 @@ namespace Players {
         private BoxCollider2D boxCollider2D;
         private Vector2 colliderSize;
 
+        [Inject] SePlayer sePlayer;
+        [Inject] SoundDatabase soundDatabase;
+
         private void Start() {
             boxCollider2D = GetComponent<BoxCollider2D>();
             colliderSize = boxCollider2D.size;
@@ -20,6 +24,7 @@ namespace Players {
                 .Select(x => x.gameObject.GetComponent<IReceivableSlash>())
                 .Where(x => x != null)
                 .Subscribe(x => {
+                    sePlayer.PlayOneShot(soundDatabase.GameStartClip);
                     x.ReceiveDamage(mediator.Power);
                     mediator.OnAttackHit();
                 })

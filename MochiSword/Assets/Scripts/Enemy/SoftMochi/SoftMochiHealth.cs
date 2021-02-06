@@ -2,6 +2,7 @@
 using UniRx;
 using UnityEngine;
 using Zenject;
+using Library.Audio;
 
 namespace Enemy.SoftMochi {
     /// <summary>
@@ -12,6 +13,9 @@ namespace Enemy.SoftMochi {
         [SerializeField] private int health = default;
         [Inject] private EffectPlayer effectPlayer = default;
         [Inject] private EffectDatabase effectDatabase = default;
+
+        [Inject] SePlayer sePlayer;
+        [Inject] SoundDatabase soundDatabase;
 
         private void Start() {
             this.ObserveEveryValueChanged(x => x.health)

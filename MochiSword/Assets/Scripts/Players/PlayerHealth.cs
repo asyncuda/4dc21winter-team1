@@ -1,6 +1,8 @@
 ﻿using Library.Scene;
 using UniRx;
 using UnityEngine;
+using Zenject;
+using Library.Audio;
 
 namespace Players {
     /// <summary>
@@ -11,6 +13,9 @@ namespace Players {
     public class PlayerHealth : MonoBehaviour, IReceivableEnemyAttack {
         [SerializeField] private int health = default;
         private PlayerMediator mediator;
+
+        [Inject] SePlayer sePlayer;
+        [Inject] SoundDatabase soundDatabase;
 
         private void Start() {
 
@@ -23,6 +28,7 @@ namespace Players {
         }
         
         public void ReceiveDamage(int point) {
+            sePlayer.PlayOneShot(soundDatabase.KillEnemyClip);
             health -= point;
             mediator.OnHealthChanged(health);
         }

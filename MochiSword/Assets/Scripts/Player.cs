@@ -6,6 +6,7 @@ using Library.Effects;
 using Players;
 using UnityEngine;
 using Zenject;
+using Library.Audio;
 
 public class Player : MonoBehaviour
 {
@@ -64,6 +65,9 @@ public class Player : MonoBehaviour
     private Direction before_dir;
 
     private bool attack_cool = false;
+
+    [Inject] SePlayer sePlayer;
+    [Inject] SoundDatabase soundDatabase;
 
     // Start is called before the first frame update
     void Start() {
@@ -184,6 +188,7 @@ public class Player : MonoBehaviour
 
     IEnumerator AttackFURI()
     {
+        sePlayer.PlayOneShot(soundDatabase.FuriClip);
         attack_state = AttackState.FURI;
         attack_furi.SetActive(true);
         if (mediator.isBuffing) buffSlashEffect.SetActive(true);
@@ -197,6 +202,7 @@ public class Player : MonoBehaviour
 
     IEnumerator AttackTUKI()
     {
+        sePlayer.PlayOneShot(soundDatabase.TukiClip);
         attack_state = AttackState.TUKI;
         attack_tuki.SetActive(true);
         if (mediator.isBuffing) buffSpearEffect.SetActive(true);

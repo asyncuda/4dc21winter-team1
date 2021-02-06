@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: SoundDatabase
   m_EditorClassIdentifier: 
   jumpClip: {fileID: 8300000, guid: beb30f1c2faf2ed45b5d5f6bccb87176, type: 3}
+  killEnemyClip: {fileID: 8300000, guid: 826d266adb00dd840b65cb294b44cb2e, type: 3}
+  furiClip: {fileID: 8300000, guid: c7e0e84826db944438f301ec61e4f2ed, type: 3}
+  tukiClip: {fileID: 8300000, guid: 5a0e1d4c19f227642907c0a13c97ec16, type: 3}
+  gameStartClip: {fileID: 8300000, guid: 681abd6e6575135498034ad6d9ae9d84, type: 3}

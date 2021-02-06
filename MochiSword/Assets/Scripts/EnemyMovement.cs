@@ -38,7 +38,6 @@ public class EnemyMovement : MonoBehaviour
         // 反転判定
         start = (transform.position - transform.right * 0.5f * transform.localScale.x) - transform.right * 0.02f;
         dir = Vector2.down;
-        //Debug.DrawRay(start, dir * 3.0f, Color.blue);    // デバッグ用
         if (IsInvert()) {
             Invert();
         }
@@ -50,12 +49,6 @@ public class EnemyMovement : MonoBehaviour
 
         // 接地判定
         isGrounded = groundCheck.isGrounded();
-
-
-        // 点滅
-        if (Input.GetKeyDown(KeyCode.P)) {
-            StartCoroutine("DeathEffect");
-        }
     }
 
     private void FixedUpdate()
