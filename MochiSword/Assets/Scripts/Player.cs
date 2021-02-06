@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
 
     private bool attack_cool = false;
 
+    private bool isDead = false;
     [Inject] SePlayer sePlayer;
     [Inject] SoundDatabase soundDatabase;
 
@@ -151,6 +152,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (isDead) {
+            return;
+        }
+
         rb2d.velocity = new Vector2(0, rb2d.velocity.y);
         rb2d.AddForce(input_movement * move_speed * Time.deltaTime);
 
@@ -298,6 +303,8 @@ public class Player : MonoBehaviour
         // Debug.Log("Hit!!!");
         if (col.tag == "DeathZone")
         {
+            isDead = true;
+            rb2d.velocity = new Vector2(0f, 0f);
             Damage(9999);
         }
         
