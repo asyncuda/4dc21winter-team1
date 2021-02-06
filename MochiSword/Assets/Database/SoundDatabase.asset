@@ -18,3 +18,4 @@ MonoBehaviour:
   furiClip: {fileID: 8300000, guid: c7e0e84826db944438f301ec61e4f2ed, type: 3}
   tukiClip: {fileID: 8300000, guid: 5a0e1d4c19f227642907c0a13c97ec16, type: 3}
   gameStartClip: {fileID: 8300000, guid: c9080f11a80504a42955deec6f9dfcaf, type: 3}
+  defeatClip: {fileID: 8300000, guid: fc21283a3b16fb846b454d70daceeacf, type: 3}

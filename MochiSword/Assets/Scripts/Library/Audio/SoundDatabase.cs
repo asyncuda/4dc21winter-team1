@@ -9,7 +9,8 @@ namespace Library.Audio {
         [SerializeField] private AudioClip furiClip = default;
         [SerializeField] private AudioClip tukiClip = default;
         [SerializeField] private AudioClip gameStartClip = default;
-        
+        [SerializeField] private AudioClip defeatClip = default;
+
 
         public AudioClip JumpClip => jumpClip;
         public AudioClip DamageClip => damageClip;
@@ -17,5 +18,6 @@ namespace Library.Audio {
         public AudioClip FuriClip => furiClip;
         public AudioClip TukiClip => tukiClip;
         public AudioClip GameStartClip => gameStartClip;
+        public AudioClip DefeatClip => defeatClip;
     }
 }
