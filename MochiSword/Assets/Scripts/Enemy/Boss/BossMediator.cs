@@ -14,11 +14,11 @@ namespace Enemy.Boss {
         }
 
         public void Pause() {
-            behaviour.enabled = true;
+            behaviour.enabled = false;
         }
 
         public void Resume() {
-            behaviour.enabled = false;
+            behaviour.enabled = true;
         }
 
         public void OnDisable() {
