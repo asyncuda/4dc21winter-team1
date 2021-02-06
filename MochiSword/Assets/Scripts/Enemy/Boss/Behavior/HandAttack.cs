@@ -13,6 +13,8 @@ public class HandAttack : MonoBehaviour
 
     [SerializeField] private Transform RightHand;
 
+    [SerializeField] private CameraShake camera_shake;
+
     private Vector3 from;
 
     private Transform target;
@@ -80,6 +82,7 @@ public class HandAttack : MonoBehaviour
             .AppendInterval(0.5f)
             .Append(target.DOMove(from + Vector3.left * 8 + Vector3.down* 2, 0.1f))
             .Join(target.DORotate(from + Vector3.forward * 90, 0.1f))
+            .AppendCallback(() => camera_shake.Shake())
             .AppendInterval(0.5f)
             .Append(target.DOMove(from, 0.2f))
             .Join(target.DORotate(from, 0.1f))
