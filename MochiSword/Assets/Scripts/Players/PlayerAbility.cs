@@ -1,4 +1,6 @@
-﻿using UniRx;
+﻿using System;
+using Library;
+using UniRx;
 using UnityEngine;
 
 namespace Players {
@@ -11,7 +13,10 @@ namespace Players {
 
         private void Start() {
             mediator = GetComponent<PlayerMediator>();
-            mediator.OnSpecialPercentageChanged = specialPoint.Select(x => x / maxSpecialPoint);
+
+            specialPoint
+                .Subscribe(x => mediator.OnSpecialChanged(x/maxSpecialPoint))
+                .AddTo(this);
 
             // ポイントが最大になったらバフ
             specialPoint
@@ -28,6 +33,8 @@ namespace Players {
                 .Where(x => x <= 0)
                 .Subscribe(_ => mediator.StopBuff())
                 .AddTo(this);
+
+            specialPoint.Subscribe(x => Debugger.Log(x)).AddTo(this);
         }
 
         public void CreasePoint(int point) {
@@ -38,11 +45,11 @@ namespace Players {
         /// ポイントを減少させる
         /// </summary>
         private void DecreasePoint() {
-            Observable.EveryFixedUpdate()
+            Observable.Interval(TimeSpan.FromSeconds(1))
                 .TakeWhile(_ => specialPoint.Value >= 0)
                 .Select(_ => (float) maxSpecialPoint/specialTime)
                 .Subscribe(x => {
-                    specialPoint.Value -= x * Time.deltaTime;
+                    specialPoint.Value -= x;
                     if (specialPoint.Value <= 0) specialPoint.Value = 0;
                 })
                 .AddTo(this);

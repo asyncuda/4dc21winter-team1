@@ -16,8 +16,6 @@ namespace Players {
 
             mediator = GetComponent<PlayerMediator>();
 
-            //mediator.OnHealthChanged(health);
-
             this.ObserveEveryValueChanged(x => x.health)
                 .Where(x => x <= 0)
                 .Subscribe(_ => SceneMover.Restart())

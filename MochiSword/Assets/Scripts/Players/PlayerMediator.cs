@@ -1,6 +1,7 @@
 ﻿using System;
 using Character;
 using Enemy;
+using Library;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -16,7 +17,8 @@ namespace Players {
         [SerializeField] private int hurtSpecialPoint = default;
         [Inject] private StabHitBox stabHitBox = default;
         [Inject] private SlashHitBox slashHitBox = default;
-        public IObservable<float> OnSpecialPercentageChanged;
+        private readonly Subject<float> percentageSubject = new Subject<float>();
+        public IObservable<float> OnSpecialPercentageChanged => percentageSubject;
         public bool isBuffing { get; private set; }
         private PlayerAbility playerAbility;
 
@@ -39,6 +41,10 @@ namespace Players {
         public void OnHealthChanged(int health) {
             playerAbility.CreasePoint(hurtSpecialPoint);
             Health = health;
+        }
+
+        public void OnSpecialChanged(float percent) {
+            percentageSubject.OnNext(percent);
         }
 
         public void StartBuff() {
