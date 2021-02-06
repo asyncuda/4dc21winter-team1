@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601b78b9ad6948fab57181b8fbabb265, type: 3}
   m_Name: SoundDatabase
   m_EditorClassIdentifier: 
+  mainBgm: {fileID: 8300000, guid: 80e86e55d282e8a4d9870a18cf9587c4, type: 3}
+  buffBgm: {fileID: 8300000, guid: 11156f672f246c94c8695d32464c8226, type: 3}
   jumpClip: {fileID: 8300000, guid: beb30f1c2faf2ed45b5d5f6bccb87176, type: 3}
   damageClip: {fileID: 8300000, guid: 826d266adb00dd840b65cb294b44cb2e, type: 3}
   killEnemyClip: {fileID: 8300000, guid: 681abd6e6575135498034ad6d9ae9d84, type: 3}

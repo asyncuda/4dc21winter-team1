@@ -3,6 +3,8 @@
 namespace Library.Audio {
     [CreateAssetMenu(menuName = "Database/SoundDatabase")]
     public class SoundDatabase : ScriptableObject {
+        [SerializeField] private AudioClip mainBgm = default;
+        [SerializeField] private AudioClip buffBgm = default;
         [SerializeField] private AudioClip jumpClip = default;
         [SerializeField] private AudioClip damageClip = default;
         [SerializeField] private AudioClip killEnemyClip = default;
@@ -11,7 +13,8 @@ namespace Library.Audio {
         [SerializeField] private AudioClip gameStartClip = default;
         [SerializeField] private AudioClip defeatClip = default;
 
-
+        public AudioClip MainBgm => mainBgm;
+        public AudioClip BuffBgm => buffBgm;
         public AudioClip JumpClip => jumpClip;
         public AudioClip DamageClip => damageClip;
         public AudioClip KillEnemyClip => killEnemyClip;
