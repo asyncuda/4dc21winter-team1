@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Library;
 using DG.Tweening;
+using Players;
 
 public class SwimClouds : MonoBehaviour
 {
+    [SerializeField] private PlayerMediator playerMediator; 
+
+
     [SerializeField] private GameObject DarkCloudLeft;
 
     [SerializeField] private GameObject DarkCloudRight;

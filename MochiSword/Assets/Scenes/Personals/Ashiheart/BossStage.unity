@@ -2040,5 +2040,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 6819479335780648381, guid: 571faf6e74e37094b8fd46ba28722db3,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819479336447997269, guid: 571faf6e74e37094b8fd46ba28722db3,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 571faf6e74e37094b8fd46ba28722db3, type: 3}
