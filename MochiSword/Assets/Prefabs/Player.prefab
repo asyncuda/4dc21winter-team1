@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+  invincibleTime: 2
 --- !u!114 &5191008710523537956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,8 +349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67dd966b7ec4525afa2f26cacc311a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cutIn: {fileID: 0}
   maxSpecialPoint: 10
   specialTime: 10
+  cutInTimeMs: 300
 --- !u!61 &4508524592188835743
 BoxCollider2D:
   m_ObjectHideFlags: 0
