@@ -1535,6 +1535,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6819479335240516552, guid: 571faf6e74e37094b8fd46ba28722db3,
+        type: 3}
+      propertyPath: camera_shake
+      value: 
+      objectReference: {fileID: 1830801161}
     - target: {fileID: 6819479335639426432, guid: 571faf6e74e37094b8fd46ba28722db3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2280,6 +2285,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1830801161 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 394828381044517488, guid: 13db66b3127958b4c86f029cf9014574,
+    type: 3}
+  m_PrefabInstance: {fileID: 1359055036}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72aaabde590b3ac499af5d8bade9da7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1970525953 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7105724114294647933, guid: 49225fb92a06a02488fbdf292efac551,
