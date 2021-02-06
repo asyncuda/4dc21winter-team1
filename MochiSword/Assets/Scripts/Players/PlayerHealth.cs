@@ -23,7 +23,7 @@ namespace Players {
 
             this.ObserveEveryValueChanged(x => x.health)
                 .Where(x => x <= 0)
-                .Subscribe(_ => SceneMover.Restart())
+                .Subscribe(_ => SceneMover.Restart().Forget())
                 .AddTo(this);
         }
         
