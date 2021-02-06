@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using Library.Scene;
+using UniRx;
 using UnityEngine;
 
 namespace Enemy.Boss {
@@ -12,8 +13,13 @@ namespace Enemy.Boss {
         private void Start() {
             this.ObserveEveryValueChanged(x => x.health)
                 .Where(x => x <= 0)
-                .Subscribe(_ => gameObject.SetActive(false))
+                .Subscribe(_ => {
+                    gameObject.SetActive(false);
+                    SceneMover.MoveAsync(Scenes.Result).Forget();
+                })
                 .AddTo(this);
+            
+            
         }
 
         public void ReceiveDamage(int point) {
